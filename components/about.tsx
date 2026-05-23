@@ -7,22 +7,22 @@ export function About() {
     {
       icon: Lightbulb,
       title: '2+ Years Experience',
-      description: 'Professional biomedical engineering with proven service track record',
+      description: 'Professional biomedical engineering support with proven service expertise.',
     },
     {
       icon: Zap,
       title: 'Fast Response',
-      description: 'Quick turnaround support and component-level repair expertise',
+      description: 'Quick troubleshooting and reliable technical assistance.',
     },
     {
       icon: Shield,
       title: 'Professional Standards',
-      description: 'Hospital-grade service with quality assurance and documentation',
+      description: 'Quality-focused service with proper documentation and support.',
     },
     {
       icon: Target,
-      title: 'Cost-Effective',
-      description: 'Reliable and timely solutions that maximize your equipment value',
+      title: 'Cost-Effective Solutions',
+      description: 'Reliable solutions designed to maximize equipment performance and value.',
     },
   ]
 
@@ -32,26 +32,27 @@ export function About() {
         {/* Section Header */}
         <div className="space-y-4 mb-16">
           <h2 className="text-3xl md:text-4xl font-bold text-foreground text-balance" style={{ fontFamily: 'var(--font-poppins)' }}>
-            About K2 Enterprise
+            About K² Enterprise
           </h2>
-          <p className="text-lg text-muted-foreground max-w-2xl">
-            K² Enterprise is a professional biomedical service company based in Ahmedabad, Gujarat, specializing in the maintenance, troubleshooting, repair, calibration, and technical support of laboratory and diagnostic equipment.
-          </p>
         </div>
 
         {/* Main About Content */}
         <div className="space-y-6 mb-16 max-w-3xl">
           <div>
-            <h3 className="text-xl font-semibold text-foreground mb-3">Our Commitment</h3>
-            <p className="text-muted-foreground leading-relaxed">
-              Founded with a commitment to precision and dependable service, we support hospitals, laboratories, diagnostic centers, clinics, and healthcare professionals with reliable biomedical engineering solutions. Our focus is to minimize equipment downtime, improve operational efficiency, and deliver long-term technical support through dedicated service and professional expertise.
+            <p className="text-lg text-muted-foreground leading-relaxed">
+              K² Enterprise is a professional biomedical service company based in Ahmedabad, Gujarat, specializing in the maintenance, repair, calibration, and technical support of laboratory and diagnostic equipment.
             </p>
           </div>
 
           <div>
-            <h3 className="text-xl font-semibold text-foreground mb-3">Our Approach</h3>
-            <p className="text-muted-foreground leading-relaxed">
-              Precision in every service, fast and reliable technical support, preventive maintenance solutions, trusted biomedical expertise, and a customer-focused approach define our commitment to healthcare facilities across Ahmedabad and Gujarat.
+            <p className="text-lg text-muted-foreground leading-relaxed">
+              We support hospitals, laboratories, diagnostic centers, and healthcare professionals with reliable biomedical engineering solutions focused on precision, efficiency, and dependable service.
+            </p>
+          </div>
+
+          <div>
+            <p className="text-lg text-muted-foreground leading-relaxed">
+              Our goal is to minimize equipment downtime and ensure smooth laboratory operations through fast response, preventive maintenance, and professional technical support.
             </p>
           </div>
         </div>

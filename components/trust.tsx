@@ -1,38 +1,28 @@
 'use client'
 
-import { Zap, Clock, CheckCircle, Shield, Lightbulb, Users, Award, Target } from 'lucide-react'
+import { Zap, Shield, Target, Lightbulb } from 'lucide-react'
 
 export function Trust() {
   const reasons = [
     {
-      icon: Target,
-      title: 'Precision-Driven Service',
-      description: 'We maintain high technical standards to ensure reliable equipment performance and accurate diagnostic support.'
+      icon: Lightbulb,
+      title: '2+ Years Experience',
+      description: 'Professional biomedical engineering support with proven service expertise.'
     },
     {
       icon: Zap,
-      title: 'Dedicated Technical Support',
-      description: 'Quick response and dedicated service assistance for hospitals, laboratories, and healthcare facilities.'
-    },
-    {
-      icon: Award,
-      title: 'Experienced Biomedical Expertise',
-      description: 'Professional understanding of biomedical equipment systems and laboratory environments.'
+      title: 'Fast Response',
+      description: 'Quick troubleshooting and reliable technical assistance.'
     },
     {
       icon: Shield,
-      title: 'Reliable Maintenance Solutions',
-      description: 'Preventive maintenance programs focused on reducing downtime and improving equipment efficiency.'
+      title: 'Professional Standards',
+      description: 'Quality-focused service with proper documentation and support.'
     },
     {
-      icon: Users,
-      title: 'Customer-Centric Approach',
-      description: 'We prioritize transparency, trust, and long-term service relationships with our clients.'
-    },
-    {
-      icon: Clock,
-      title: 'Emergency Support Available',
-      description: 'Monday – Saturday with emergency technical support available when needed.'
+      icon: Target,
+      title: 'Cost-Effective Solutions',
+      description: 'Reliable solutions designed to maximize equipment performance and value.'
     },
   ]
 
@@ -42,15 +32,12 @@ export function Trust() {
         {/* Section Header */}
         <div className="space-y-4 mb-16 max-w-2xl">
           <h2 className="text-3xl md:text-4xl font-bold text-foreground text-balance" style={{ fontFamily: 'var(--font-poppins)' }}>
-            Why Choose K² Enterprise?
+            Why Choose Us
           </h2>
-          <p className="text-lg text-muted-foreground">
-            Delivering reliable biomedical service with precision, dedication, and long-term commitment to your healthcare facility.
-          </p>
         </div>
 
         {/* Reasons Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {reasons.map((reason, i) => {
             const Icon = reason.icon
             return (
