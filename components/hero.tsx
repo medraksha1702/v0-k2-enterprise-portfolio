@@ -80,42 +80,46 @@ export function Hero() {
           </div>
 
           {/* Right Visual */}
-          <div className="relative">
+          <div className="relative hidden md:block">
             <div className="bg-gradient-to-br from-primary/10 to-accent/10 rounded-2xl p-8 md:p-12 border border-border">
-              <div className="space-y-6">
-                <div className="space-y-2">
-                  <div className="h-4 bg-primary/20 rounded-full w-24"></div>
-                  <div className="h-3 bg-muted rounded-full w-32"></div>
-                  <div className="h-3 bg-muted rounded-full w-28"></div>
+              <div className="space-y-8">
+                {/* Service Stats */}
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="bg-primary/5 rounded-lg p-4">
+                    <p className="text-2xl font-bold text-primary mb-1">8+</p>
+                    <p className="text-xs text-muted-foreground font-medium">Service Types</p>
+                  </div>
+                  <div className="bg-accent/5 rounded-lg p-4">
+                    <p className="text-2xl font-bold text-accent mb-1">Fast</p>
+                    <p className="text-xs text-muted-foreground font-medium">Response Time</p>
+                  </div>
                 </div>
 
-                <div className="pt-6 space-y-4 border-t border-border">
-                  {[1, 2, 3].map((i) => (
-                    <div key={i} className="flex items-start gap-4">
-                      <div className="w-3 h-3 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-                      <div className="space-y-2 flex-1">
-                        <div className="h-3 bg-primary/20 rounded-full w-24"></div>
-                        <div className="h-2 bg-muted rounded-full w-full"></div>
-                        <div className="h-2 bg-muted rounded-full w-32"></div>
-                      </div>
+                {/* Features List */}
+                <div className="space-y-3">
+                  <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-4">Key Capabilities</p>
+                  {[
+                    'CBC Analyzer Service',
+                    'Biochemistry Support',
+                    'Microscope Maintenance',
+                    'Centrifuge Service'
+                  ].map((feature, i) => (
+                    <div key={i} className="flex items-center gap-3 text-sm">
+                      <div className="w-1.5 h-1.5 bg-primary rounded-full flex-shrink-0"></div>
+                      <span className="text-foreground font-medium">{feature}</span>
                     </div>
                   ))}
-                </div>
-
-                <div className="pt-6 flex gap-2">
-                  <div className="flex-1 h-10 bg-primary/10 rounded-lg"></div>
-                  <div className="flex-1 h-10 bg-muted rounded-lg"></div>
                 </div>
               </div>
             </div>
 
             {/* Floating Card */}
             <div className="absolute -bottom-6 -right-6 bg-card border border-border rounded-xl p-4 shadow-lg max-w-xs">
-              <p className="text-xs font-semibold text-muted-foreground uppercase mb-2">
-                Our Expertise
+              <p className="text-xs font-semibold text-primary uppercase mb-2">
+                Professional Service
               </p>
               <p className="text-sm font-semibold text-foreground">
-                15+ years of proven biomedical engineering excellence
+                2+ years of proven biomedical engineering expertise
               </p>
             </div>
           </div>
