@@ -6,43 +6,53 @@ export function Services() {
   const services = [
     {
       icon: Wrench,
-      title: 'Installation & Commissioning',
-      description: 'Complete setup and calibration of medical equipment with full documentation',
+      title: 'CBC Analyzer Service',
+      description: 'Professional installation, troubleshooting, preventive maintenance, and repair support for CBC analyzers.',
     },
     {
       icon: BarChart3,
-      title: 'Preventive Maintenance',
-      description: 'Scheduled maintenance programs to keep equipment running optimally',
+      title: 'Biochemistry Analyzer Support',
+      description: 'Reliable servicing and calibration support for biochemistry analyzers to ensure accurate diagnostic performance.',
     },
     {
       icon: Zap,
-      title: 'Breakdown Repair',
-      description: 'Component-level repair expertise with quick turnaround times',
+      title: 'Microscope Maintenance',
+      description: 'Comprehensive microscope cleaning, alignment, repair, and maintenance services.',
     },
     {
       icon: Gauge,
-      title: 'Calibration Support',
-      description: 'Precision calibration and performance testing for accurate results',
+      title: 'Centrifuge Service',
+      description: 'Inspection, balancing, motor servicing, and preventive maintenance for laboratory centrifuges.',
     },
     {
       icon: Package,
-      title: 'Spare Parts Supply',
-      description: 'Sourcing and supply of genuine medical equipment spare parts',
+      title: 'Semi-Auto Analyzer Support',
+      description: 'Technical support and maintenance solutions for semi-auto analyzers and associated laboratory systems.',
     },
     {
       icon: CheckCircle,
-      title: 'Annual Maintenance Contracts',
-      description: 'Comprehensive AMC packages tailored to your facility needs',
+      title: 'Cryostat System Maintenance',
+      description: 'Specialized support for cryostat systems including servicing, calibration, and performance optimization.',
+    },
+    {
+      icon: Wrench,
+      title: 'Preventive Maintenance',
+      description: 'Routine inspection and maintenance programs designed to reduce downtime and extend equipment life.',
+    },
+    {
+      icon: Gauge,
+      title: 'Calibration & Troubleshooting',
+      description: 'Precision calibration and systematic troubleshooting for reliable laboratory equipment operation.',
     },
   ]
 
   const equipment = [
-    'Laboratory Equipment',
-    'ICU Equipment',
-    'Diagnostic Instruments',
-    'Life Science Equipment',
-    'Monitoring Devices',
-    'Surgical Equipment',
+    'CBC Analyzers',
+    'Biochemistry Analyzers',
+    'Microscopes',
+    'Centrifuges',
+    'Semi-Auto Analyzers',
+    'Cryostat Systems',
   ]
 
   return (
@@ -59,7 +69,7 @@ export function Services() {
         </div>
 
         {/* Services Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16">
           {services.map((service, i) => {
             const Icon = service.icon
             return (

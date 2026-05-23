@@ -26,16 +26,16 @@ export function Hero() {
                 Precision Biomedical Service & Support
               </h1>
               <p className="text-lg text-muted-foreground text-balance leading-relaxed">
-                Trusted maintenance, repair, calibration, and technical support for laboratory & diagnostic equipment.
+                K² Enterprise delivers reliable biomedical engineering solutions with precision, dedication, and technical expertise to ensure uninterrupted performance of critical healthcare equipment.
               </p>
             </div>
 
             {/* Key Benefits */}
             <div className="space-y-3">
               {[
-                'Component-level repair expertise',
-                'Fast response support',
-                'Hospital-grade standards',
+                'Precision-driven service',
+                'Dedicated technical support',
+                'Experienced biomedical expertise',
               ].map((benefit, i) => (
                 <div key={i} className="flex items-center gap-3">
                   <CheckCircle2 className="w-5 h-5 text-primary flex-shrink-0" />
@@ -70,11 +70,11 @@ export function Hero() {
             <div className="flex flex-col sm:flex-row gap-6 pt-8 border-t border-border">
               <div>
                 <p className="text-xs font-semibold text-muted-foreground uppercase">Phone</p>
-                <p className="text-lg font-semibold text-foreground">+91 97248 41765</p>
+                <p className="text-lg font-semibold text-foreground">+91 9510768056</p>
               </div>
               <div>
                 <p className="text-xs font-semibold text-muted-foreground uppercase">Email</p>
-                <p className="text-lg font-semibold text-foreground">kaushikkoshti628@gmail.com</p>
+                <p className="text-lg font-semibold text-foreground">k2biomedicalservice@gmail.com</p>
               </div>
             </div>
           </div>

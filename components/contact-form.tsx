@@ -57,8 +57,8 @@ export function ContactForm() {
                 </div>
                 <div>
                   <p className="font-semibold text-foreground">Phone</p>
-                  <p className="text-muted-foreground">+91 97248 41765</p>
-                  <p className="text-sm text-muted-foreground mt-1">Available 24/7</p>
+                  <p className="text-muted-foreground">+91 9510768056</p>
+                  <p className="text-sm text-muted-foreground mt-1">Monday – Saturday</p>
                 </div>
               </div>
 
@@ -68,8 +68,8 @@ export function ContactForm() {
                 </div>
                 <div>
                   <p className="font-semibold text-foreground">Email</p>
-                  <p className="text-muted-foreground">kaushikkoshti628@gmail.com</p>
-                  <p className="text-sm text-muted-foreground mt-1">Response within 2 hours</p>
+                  <p className="text-muted-foreground">k2biomedicalservice@gmail.com</p>
+                  <p className="text-sm text-muted-foreground mt-1">Quick response support</p>
                 </div>
               </div>
 
@@ -80,20 +80,20 @@ export function ContactForm() {
                 <div>
                   <p className="font-semibold text-foreground">Location</p>
                   <p className="text-muted-foreground">Ahmedabad, Gujarat</p>
-                  <p className="text-sm text-muted-foreground mt-1">Serving across India</p>
+                  <p className="text-sm text-muted-foreground mt-1">Serving hospitals & laboratories across Gujarat</p>
                 </div>
               </div>
             </div>
 
             {/* Why Choose */}
             <div className="bg-primary/5 border border-primary/20 rounded-xl p-6 space-y-4">
-              <p className="font-semibold text-foreground">Why Choose K2 Enterprise?</p>
+              <p className="font-semibold text-foreground">Why Choose K² Enterprise?</p>
               <ul className="space-y-2 text-sm text-muted-foreground">
-                <li>✓ Fast response support</li>
-                <li>✓ Component-level repair expertise</li>
-                <li>✓ Cost-effective solutions</li>
-                <li>✓ Professional documentation</li>
-                <li>✓ Hospital-grade service standards</li>
+                <li>✓ Precision-driven service approach</li>
+                <li>✓ Dedicated technical team support</li>
+                <li>✓ Experienced biomedical expertise</li>
+                <li>✓ Reliable preventive maintenance</li>
+                <li>✓ Customer-centric relationships</li>
               </ul>
             </div>
           </div>

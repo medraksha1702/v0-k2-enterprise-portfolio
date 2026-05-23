@@ -35,7 +35,7 @@ export function About() {
             About K2 Enterprise
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl">
-            We are a Gold Medalist biomedical engineer with hands-on experience in installation, maintenance, repair, and management of medical equipment across hospitals and diagnostic centers.
+            K² Enterprise is a professional biomedical service company based in Ahmedabad, Gujarat, specializing in the maintenance, troubleshooting, repair, calibration, and technical support of laboratory and diagnostic equipment.
           </p>
         </div>
 
@@ -43,16 +43,16 @@ export function About() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-16">
           <div className="space-y-6">
             <div>
-              <h3 className="text-xl font-semibold text-foreground mb-3">Our Mission</h3>
+              <h3 className="text-xl font-semibold text-foreground mb-3">Our Commitment</h3>
               <p className="text-muted-foreground leading-relaxed">
-                To support healthcare institutions with dependable biomedical engineering services that enhance equipment performance, safety, and longevity. We provide cost-effective, reliable, and timely solutions that healthcare professionals can trust.
+                Founded with a commitment to precision and dependable service, we support hospitals, laboratories, diagnostic centers, clinics, and healthcare professionals with reliable biomedical engineering solutions. Our focus is to minimize equipment downtime, improve operational efficiency, and deliver long-term technical support through dedicated service and professional expertise.
               </p>
             </div>
 
             <div>
-              <h3 className="text-xl font-semibold text-foreground mb-3">Our Expertise</h3>
+              <h3 className="text-xl font-semibold text-foreground mb-3">Our Approach</h3>
               <p className="text-muted-foreground leading-relaxed">
-                With strong expertise in hospital equipment systems, procurement, and compliance documentation, we deliver technical solutions that help healthcare facilities operate efficiently and safely. Every project receives hands-on attention from experienced engineers.
+                Precision in every service, fast and reliable technical support, preventive maintenance solutions, trusted biomedical expertise, and a customer-focused approach define our commitment to healthcare facilities across Ahmedabad and Gujarat.
               </p>
             </div>
           </div>

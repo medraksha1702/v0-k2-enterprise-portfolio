@@ -27,7 +27,7 @@ export function Footer() {
               <span className="font-bold text-white">K2 Enterprise</span>
             </Link>
             <p className="text-sm text-white/70 leading-relaxed">
-              Professional biomedical engineering services for healthcare facilities.
+              Where Precision Meets Dedication. Professional Biomedical Equipment Service & Support.
             </p>
           </div>
 
@@ -50,13 +50,13 @@ export function Footer() {
 
           {/* Services */}
           <div className="space-y-4">
-            <h3 className="font-semibold text-white">Services</h3>
+            <h3 className="font-semibold text-white">Key Services</h3>
             <ul className="space-y-2 text-sm text-white/70">
-              <li>Equipment Installation</li>
+              <li>CBC Analyzer Service</li>
+              <li>Biochemistry Analyzer Support</li>
+              <li>Microscope Maintenance</li>
+              <li>Centrifuge Service</li>
               <li>Preventive Maintenance</li>
-              <li>Breakdown Repair</li>
-              <li>Calibration Support</li>
-              <li>AMC Contracts</li>
             </ul>
           </div>
 
@@ -64,13 +64,13 @@ export function Footer() {
           <div className="space-y-4">
             <h3 className="font-semibold text-white">Get in Touch</h3>
             <div className="space-y-3">
-              <a href="tel:+919724841765" className="flex items-center gap-2 text-sm text-white/70 hover:text-white transition-colors">
+              <a href="tel:+919510768056" className="flex items-center gap-2 text-sm text-white/70 hover:text-white transition-colors">
                 <Phone className="w-4 h-4 flex-shrink-0" />
-                +91 97248 41765
+                +91 9510768056
               </a>
-              <a href="mailto:kaushikkoshti628@gmail.com" className="flex items-center gap-2 text-sm text-white/70 hover:text-white transition-colors">
+              <a href="mailto:k2biomedicalservice@gmail.com" className="flex items-center gap-2 text-sm text-white/70 hover:text-white transition-colors">
                 <Mail className="w-4 h-4 flex-shrink-0" />
-                kaushikkoshti628@gmail.com
+                k2biomedicalservice@gmail.com
               </a>
               <div className="flex items-center gap-2 text-sm text-white/70">
                 <MapPin className="w-4 h-4 flex-shrink-0" />
@@ -86,7 +86,7 @@ export function Footer() {
         {/* Bottom Footer */}
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-sm text-white/70 text-center sm:text-left">
-            © {currentYear} K2 Enterprise. All rights reserved. | Professional Biomedical Equipment Solutions
+            © {currentYear} K² Enterprise. All Rights Reserved. | Serving Hospitals, Laboratories & Diagnostic Centers Across Gujarat.
           </p>
           <div className="flex items-center gap-4">
             <a

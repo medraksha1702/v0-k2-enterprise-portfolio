@@ -1,38 +1,38 @@
 'use client'
 
-import { Zap, Clock, CheckCircle, Shield, Lightbulb, Users } from 'lucide-react'
+import { Zap, Clock, CheckCircle, Shield, Lightbulb, Users, Award, Target } from 'lucide-react'
 
 export function Trust() {
   const reasons = [
     {
-      icon: Clock,
-      title: 'Fast Response',
-      description: 'Rapid response times to minimize equipment downtime'
-    },
-    {
-      icon: CheckCircle,
-      title: 'Precision Diagnostics',
-      description: 'Accurate diagnosis and component-level repair expertise'
-    },
-    {
-      icon: Shield,
-      title: 'Preventive Maintenance',
-      description: 'Scheduled programs to extend equipment lifespan'
-    },
-    {
-      icon: Lightbulb,
-      title: 'Trusted Technical Support',
-      description: '24×7 professional support with expert engineers'
-    },
-    {
-      icon: Users,
-      title: 'Laboratory Equipment Expertise',
-      description: 'Specialized knowledge in biomedical diagnostic systems'
+      icon: Target,
+      title: 'Precision-Driven Service',
+      description: 'We maintain high technical standards to ensure reliable equipment performance and accurate diagnostic support.'
     },
     {
       icon: Zap,
-      title: 'Emergency Support',
-      description: '24×7 assistance available for critical equipment failures'
+      title: 'Dedicated Technical Support',
+      description: 'Quick response and dedicated service assistance for hospitals, laboratories, and healthcare facilities.'
+    },
+    {
+      icon: Award,
+      title: 'Experienced Biomedical Expertise',
+      description: 'Professional understanding of biomedical equipment systems and laboratory environments.'
+    },
+    {
+      icon: Shield,
+      title: 'Reliable Maintenance Solutions',
+      description: 'Preventive maintenance programs focused on reducing downtime and improving equipment efficiency.'
+    },
+    {
+      icon: Users,
+      title: 'Customer-Centric Approach',
+      description: 'We prioritize transparency, trust, and long-term service relationships with our clients.'
+    },
+    {
+      icon: Clock,
+      title: 'Emergency Support Available',
+      description: 'Monday – Saturday with emergency technical support available when needed.'
     },
   ]
 
@@ -42,10 +42,10 @@ export function Trust() {
         {/* Section Header */}
         <div className="space-y-4 mb-16 max-w-2xl">
           <h2 className="text-3xl md:text-4xl font-bold text-foreground text-balance" style={{ fontFamily: 'var(--font-poppins)' }}>
-            Why Choose K² Enterprise
+            Why Choose K² Enterprise?
           </h2>
           <p className="text-lg text-muted-foreground">
-            Delivering reliable biomedical equipment support with precision and technical expertise.
+            Delivering reliable biomedical service with precision, dedication, and long-term commitment to your healthcare facility.
           </p>
         </div>
 

@@ -6,24 +6,31 @@ export function Experience() {
   const experiences = [
     {
       icon: Building2,
-      period: 'Present',
-      title: 'Biomedical Service & Sales Specialist',
-      company: 'K2 Enterprise',
-      description: 'Providing technical services and equipment solutions to hospitals, laboratories, and healthcare providers.',
+      period: '1',
+      title: 'Inspection & Diagnosis',
+      company: 'Initial Assessment',
+      description: 'We carefully inspect the equipment and identify the root cause of the issue.',
     },
     {
       icon: Building2,
-      period: 'Sept 2019 - Present',
-      title: 'Biomedical Engineer',
-      company: 'Sterling Accuris Wellness Pvt. Ltd.',
-      description: 'Installation, maintenance, repair, and management of medical equipment across hospitals and diagnostic centers.',
+      period: '2',
+      title: 'Technical Evaluation',
+      company: 'In-Depth Analysis',
+      description: 'Detailed troubleshooting and performance evaluation by experienced biomedical professionals.',
     },
     {
       icon: Building2,
-      period: 'Jun 2018 - Aug 2019',
-      title: 'Biomedical Engineer',
-      company: 'Sanjivani Super Speciality Hospital Pvt. Ltd.',
-      description: 'Complete biomedical equipment support and maintenance for hospital facilities.',
+      period: '3',
+      title: 'Repair & Calibration',
+      company: 'Expert Service',
+      description: 'Accurate repair, servicing, calibration, and replacement support where required.',
+    },
+    {
+      icon: Building2,
+      period: '4',
+      title: 'Testing & Final Support',
+      company: 'Quality Assurance',
+      description: 'Complete testing and quality checks before equipment handover.',
     },
   ]
 
@@ -62,17 +69,17 @@ export function Experience() {
         {/* Section Header */}
         <div className="space-y-4 mb-16">
           <h2 className="text-3xl md:text-4xl font-bold text-foreground text-balance" style={{ fontFamily: 'var(--font-poppins)' }}>
-            Professional Experience & Expertise
+            Our Working Process
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl">
-            Over a decade of proven expertise in biomedical engineering, equipment management, and healthcare solutions.
+            A systematic, professional approach to biomedical equipment service and support.
           </p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-          {/* Experience Timeline */}
+          {/* Service Process Timeline */}
           <div className="space-y-6">
-            <h3 className="text-2xl font-bold text-foreground mb-8">Professional Journey</h3>
+            <h3 className="text-2xl font-bold text-foreground mb-8">Service Steps</h3>
             {experiences.map((exp, i) => {
               const Icon = exp.icon
               return (
@@ -89,49 +96,47 @@ export function Experience() {
             })}
           </div>
 
-          {/* Right Column - Competencies & Education */}
+          {/* Right Column - About Us */}
           <div className="space-y-8">
-            {/* Core Competencies */}
+            {/* Service Availability */}
             <div>
-              <h3 className="text-2xl font-bold text-foreground mb-6">Core Competencies</h3>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                {competencies.map((comp, i) => (
-                  <div
-                    key={i}
-                    className="flex items-center gap-3 p-3 bg-card border border-border rounded-lg hover:border-primary/50 transition-colors"
-                  >
-                    <div className="w-2 h-2 rounded-full bg-primary flex-shrink-0"></div>
-                    <span className="text-sm text-foreground">{comp}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Education */}
-            <div>
-              <h3 className="text-2xl font-bold text-foreground mb-6">Education</h3>
-              <div className="bg-card border border-border rounded-xl p-6 space-y-3">
-                <div className="flex items-start gap-3">
-                  <GraduationCap className="w-5 h-5 text-primary flex-shrink-0 mt-1" />
-                  <div>
-                    <p className="font-semibold text-foreground">B.Tech in Biomedical & Instrumentation Engineering</p>
-                    <p className="text-sm text-muted-foreground">CGPA: 8.98 — Gold Medalist</p>
-                  </div>
+              <h3 className="text-2xl font-bold text-foreground mb-6">Service Availability</h3>
+              <div className="space-y-3">
+                <div className="flex items-center gap-3 p-3 bg-card border border-border rounded-lg">
+                  <div className="w-2 h-2 rounded-full bg-primary flex-shrink-0"></div>
+                  <span className="text-foreground font-medium">Monday – Saturday</span>
+                </div>
+                <div className="flex items-center gap-3 p-3 bg-card border border-border rounded-lg">
+                  <div className="w-2 h-2 rounded-full bg-primary flex-shrink-0"></div>
+                  <span className="text-foreground font-medium">Emergency Technical Support Available</span>
                 </div>
               </div>
             </div>
 
-            {/* Achievements */}
+            {/* About Owner */}
             <div>
-              <h3 className="text-2xl font-bold text-foreground mb-6">Achievements</h3>
-              <div className="space-y-3">
-                {achievements.map((ach, i) => (
-                  <div key={i} className="bg-card border border-border rounded-lg p-4">
-                    <p className="text-sm font-semibold text-primary mb-1">{ach.rank}</p>
-                    <p className="font-semibold text-foreground">{ach.title}</p>
-                    <p className="text-sm text-muted-foreground">{ach.event}</p>
-                  </div>
-                ))}
+              <h3 className="text-2xl font-bold text-foreground mb-6">Meet The Proprietor</h3>
+              <div className="bg-card border border-border rounded-xl p-6 space-y-3">
+                <div>
+                  <p className="font-semibold text-foreground">Kaushik Koshti</p>
+                  <p className="text-sm text-muted-foreground mb-3">Proprietor — K² Enterprise</p>
+                  <p className="text-sm text-muted-foreground italic">
+                    &quot;Our mission is to provide reliable biomedical support with precision, professionalism, and long-term customer trust.&quot;
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* Service Coverage */}
+            <div>
+              <h3 className="text-2xl font-bold text-foreground mb-6">Service Coverage</h3>
+              <div className="bg-card border border-border rounded-lg p-4">
+                <p className="text-foreground font-medium">Serving across:</p>
+                <ul className="space-y-2 mt-3 text-sm text-muted-foreground">
+                  <li>✓ Ahmedabad, Gujarat</li>
+                  <li>✓ Greater Gujarat Region</li>
+                  <li>✓ Available for nationwide projects</li>
+                </ul>
               </div>
             </div>
           </div>
