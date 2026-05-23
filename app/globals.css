@@ -4,30 +4,30 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  --background: oklch(0.98 0.001 0);
-  --foreground: oklch(0.18 0.01 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.18 0.01 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.18 0.01 0);
-  --primary: oklch(0.2 0.02 200);
-  --primary-foreground: oklch(0.98 0.001 0);
-  --secondary: oklch(0.45 0.05 200);
-  --secondary-foreground: oklch(0.98 0.001 0);
-  --muted: oklch(0.92 0.002 0);
-  --muted-foreground: oklch(0.55 0.01 0);
-  --accent: oklch(0.3 0.08 25);
-  --accent-foreground: oklch(0.98 0.001 0);
-  --destructive: oklch(0.62 0.22 29.23);
-  --destructive-foreground: oklch(0.98 0.001 0);
-  --border: oklch(0.92 0.002 0);
-  --input: oklch(0.97 0.001 0);
-  --ring: oklch(0.3 0.08 200);
-  --chart-1: oklch(0.3 0.08 25);
-  --chart-2: oklch(0.2 0.02 200);
-  --chart-3: oklch(0.45 0.05 200);
-  --chart-4: oklch(0.55 0.01 0);
-  --chart-5: oklch(0.35 0.06 35);
+  --background: #F8FAFA;
+  --foreground: #1F2933;
+  --card: #FFFFFF;
+  --card-foreground: #1F2933;
+  --popover: #FFFFFF;
+  --popover-foreground: #1F2933;
+  --primary: #006D6F;
+  --primary-foreground: #FFFFFF;
+  --secondary: #004B4D;
+  --secondary-foreground: #FFFFFF;
+  --muted: #BFC5C7;
+  --muted-foreground: #6B7280;
+  --accent: #006D6F;
+  --accent-foreground: #FFFFFF;
+  --destructive: #DC2626;
+  --destructive-foreground: #FFFFFF;
+  --border: #E5E7EB;
+  --input: #F3F4F6;
+  --ring: #006D6F;
+  --chart-1: #006D6F;
+  --chart-2: #004B4D;
+  --chart-3: #BFC5C7;
+  --chart-4: #1F2933;
+  --chart-5: #6B7280;
   --radius: 0.625rem;
   --sidebar: oklch(0.98 0.001 0);
   --sidebar-foreground: oklch(0.18 0.01 0);
@@ -40,42 +40,43 @@
 }
 
 .dark {
-  --background: oklch(0.15 0.01 0);
-  --foreground: oklch(0.95 0.001 0);
-  --card: oklch(0.2 0.01 0);
-  --card-foreground: oklch(0.95 0.001 0);
-  --popover: oklch(0.2 0.01 0);
-  --popover-foreground: oklch(0.95 0.001 0);
-  --primary: oklch(0.75 0.05 200);
-  --primary-foreground: oklch(0.15 0.01 0);
-  --secondary: oklch(0.55 0.05 200);
-  --secondary-foreground: oklch(0.95 0.001 0);
-  --muted: oklch(0.35 0.01 0);
-  --muted-foreground: oklch(0.65 0.01 0);
-  --accent: oklch(0.65 0.12 25);
-  --accent-foreground: oklch(0.15 0.01 0);
-  --destructive: oklch(0.62 0.22 29.23);
-  --destructive-foreground: oklch(0.95 0.001 0);
-  --border: oklch(0.3 0.01 0);
-  --input: oklch(0.25 0.01 0);
-  --ring: oklch(0.75 0.05 200);
-  --chart-1: oklch(0.65 0.12 25);
-  --chart-2: oklch(0.75 0.05 200);
-  --chart-3: oklch(0.55 0.05 200);
-  --chart-4: oklch(0.65 0.01 0);
-  --chart-5: oklch(0.7 0.08 35);
-  --sidebar: oklch(0.18 0.01 0);
-  --sidebar-foreground: oklch(0.95 0.001 0);
-  --sidebar-primary: oklch(0.75 0.05 200);
-  --sidebar-primary-foreground: oklch(0.18 0.01 0);
-  --sidebar-accent: oklch(0.65 0.12 25);
-  --sidebar-accent-foreground: oklch(0.18 0.01 0);
-  --sidebar-border: oklch(0.3 0.01 0);
-  --sidebar-ring: oklch(0.75 0.05 200);
+  --background: #0F1419;
+  --foreground: #F0F2F5;
+  --card: #1A1F26;
+  --card-foreground: #F0F2F5;
+  --popover: #1A1F26;
+  --popover-foreground: #F0F2F5;
+  --primary: #00A0A3;
+  --primary-foreground: #0F1419;
+  --secondary: #008A8D;
+  --secondary-foreground: #F0F2F5;
+  --muted: #4B5563;
+  --muted-foreground: #9CA3AF;
+  --accent: #00A0A3;
+  --accent-foreground: #0F1419;
+  --destructive: #F87171;
+  --destructive-foreground: #0F1419;
+  --border: #2D3748;
+  --input: #2D3748;
+  --ring: #00A0A3;
+  --chart-1: #00A0A3;
+  --chart-2: #008A8D;
+  --chart-3: #BFC5C7;
+  --chart-4: #F0F2F5;
+  --chart-5: #9CA3AF;
+  --sidebar: #1A1F26;
+  --sidebar-foreground: #F0F2F5;
+  --sidebar-primary: #00A0A3;
+  --sidebar-primary-foreground: #1A1F26;
+  --sidebar-accent: #00A0A3;
+  --sidebar-accent-foreground: #1A1F26;
+  --sidebar-border: #2D3748;
+  --sidebar-ring: #00A0A3;
 }
 
 @theme inline {
-  --font-sans: 'Geist', 'Geist Fallback';
+  --font-sans: var(--font-inter), 'Inter Fallback';
+  --font-serif: var(--font-poppins), 'Poppins Fallback';
   --font-mono: 'Geist Mono', 'Geist Mono Fallback';
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -122,4 +123,32 @@
   body {
     @apply bg-background text-foreground;
   }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.6s ease-out;
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.6s ease-out;
 }

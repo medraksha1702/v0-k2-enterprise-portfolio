@@ -22,11 +22,11 @@ export function Hero() {
                   Professional Biomedical Services
                 </span>
               </div>
-              <h1 className="text-4xl md:text-5xl font-bold text-foreground text-balance leading-tight">
-                Reliable Medical Equipment Solutions
+              <h1 className="text-4xl md:text-5xl font-bold text-foreground text-balance leading-tight" style={{ fontFamily: 'var(--font-poppins)' }}>
+                Precision Biomedical Service & Support
               </h1>
               <p className="text-lg text-muted-foreground text-balance leading-relaxed">
-                Fast • Precise • Professional support for hospitals and laboratories. Expert biomedical engineering services you can trust.
+                Trusted maintenance, repair, calibration, and technical support for laboratory & diagnostic equipment.
               </p>
             </div>
 
@@ -60,9 +60,9 @@ export function Hero() {
                 asChild
                 variant="outline"
                 size="lg"
-                className="border-border text-foreground hover:bg-muted"
+                className="border-primary text-primary hover:bg-primary/10"
               >
-                <a href="#services">Learn More</a>
+                <a href="#contact">Contact Now</a>
               </Button>
             </div>
 

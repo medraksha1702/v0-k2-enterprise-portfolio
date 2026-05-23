@@ -41,11 +41,11 @@ export function ContactForm() {
           {/* Contact Info */}
           <div className="space-y-8">
             <div className="space-y-4">
-              <h2 className="text-3xl md:text-4xl font-bold text-foreground text-balance">
+              <h2 className="text-3xl md:text-4xl font-bold text-foreground text-balance" style={{ fontFamily: 'var(--font-poppins)' }}>
                 Request Your Service
               </h2>
               <p className="text-lg text-muted-foreground">
-                Get in touch with our team. We respond quickly and professionally to all inquiries.
+                Get in touch with our technical team. We respond quickly and professionally to all service requests.
               </p>
             </div>
 

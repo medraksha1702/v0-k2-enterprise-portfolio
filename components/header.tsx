@@ -24,7 +24,7 @@ export function Header() {
             <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
               <span className="text-primary-foreground font-bold text-sm">K2</span>
             </div>
-            <span className="font-bold text-lg text-foreground hidden sm:inline">K2 Enterprise</span>
+            <span className="font-bold text-lg text-foreground hidden sm:inline" style={{ fontFamily: 'var(--font-poppins)' }}>K2 Enterprise</span>
           </Link>
 
           {/* Desktop Navigation */}
