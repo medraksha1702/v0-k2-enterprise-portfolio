@@ -61,7 +61,7 @@ export function Services() {
         {/* Section Header */}
         <div className="space-y-4 mb-16 max-w-2xl">
           <h2 className="text-3xl md:text-4xl font-bold text-foreground text-balance" style={{ fontFamily: 'var(--font-poppins)' }}>
-            Comprehensive Biomedical Services
+            Biomedical Services
           </h2>
           <p className="text-lg text-muted-foreground">
             We provide complete medical equipment support covering installation, maintenance, repair, and compliance documentation.

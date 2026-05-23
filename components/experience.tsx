@@ -127,18 +127,7 @@ export function Experience() {
               </div>
             </div>
 
-            {/* Service Coverage */}
-            <div>
-              <h3 className="text-2xl font-bold text-foreground mb-6">Service Coverage</h3>
-              <div className="bg-card border border-border rounded-lg p-4">
-                <p className="text-foreground font-medium">Serving across:</p>
-                <ul className="space-y-2 mt-3 text-sm text-muted-foreground">
-                  <li>✓ Ahmedabad, Gujarat</li>
-                  <li>✓ Greater Gujarat Region</li>
-                  <li>✓ Available for nationwide projects</li>
-                </ul>
-              </div>
-            </div>
+
           </div>
         </div>
       </div>

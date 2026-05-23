@@ -1,13 +1,13 @@
 'use client'
 
-import { Award, Zap, Shield, Target } from 'lucide-react'
+import { Zap, Shield, Target, Lightbulb } from 'lucide-react'
 
 export function About() {
   const highlights = [
     {
-      icon: Award,
-      title: 'Gold Medalist',
-      description: 'B.Tech in Biomedical & Instrumentation Engineering with 8.98 CGPA',
+      icon: Lightbulb,
+      title: '2+ Years Experience',
+      description: 'Professional biomedical engineering with proven service track record',
     },
     {
       icon: Zap,
@@ -17,7 +17,7 @@ export function About() {
     {
       icon: Shield,
       title: 'Professional Standards',
-      description: 'Hospital-grade service with NABL/NABH audit documentation',
+      description: 'Hospital-grade service with quality assurance and documentation',
     },
     {
       icon: Target,
@@ -40,41 +40,19 @@ export function About() {
         </div>
 
         {/* Main About Content */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-16">
-          <div className="space-y-6">
-            <div>
-              <h3 className="text-xl font-semibold text-foreground mb-3">Our Commitment</h3>
-              <p className="text-muted-foreground leading-relaxed">
-                Founded with a commitment to precision and dependable service, we support hospitals, laboratories, diagnostic centers, clinics, and healthcare professionals with reliable biomedical engineering solutions. Our focus is to minimize equipment downtime, improve operational efficiency, and deliver long-term technical support through dedicated service and professional expertise.
-              </p>
-            </div>
-
-            <div>
-              <h3 className="text-xl font-semibold text-foreground mb-3">Our Approach</h3>
-              <p className="text-muted-foreground leading-relaxed">
-                Precision in every service, fast and reliable technical support, preventive maintenance solutions, trusted biomedical expertise, and a customer-focused approach define our commitment to healthcare facilities across Ahmedabad and Gujarat.
-              </p>
-            </div>
+        <div className="space-y-6 mb-16 max-w-3xl">
+          <div>
+            <h3 className="text-xl font-semibold text-foreground mb-3">Our Commitment</h3>
+            <p className="text-muted-foreground leading-relaxed">
+              Founded with a commitment to precision and dependable service, we support hospitals, laboratories, diagnostic centers, clinics, and healthcare professionals with reliable biomedical engineering solutions. Our focus is to minimize equipment downtime, improve operational efficiency, and deliver long-term technical support through dedicated service and professional expertise.
+            </p>
           </div>
 
-          {/* Stats Grid */}
-          <div className="grid grid-cols-2 gap-6">
-            <div className="bg-card border border-border rounded-xl p-6 space-y-2">
-              <p className="text-3xl font-bold text-primary">15+</p>
-              <p className="text-sm text-muted-foreground">Years of Experience</p>
-            </div>
-            <div className="bg-card border border-border rounded-xl p-6 space-y-2">
-              <p className="text-3xl font-bold text-primary">100+</p>
-              <p className="text-sm text-muted-foreground">Projects Completed</p>
-            </div>
-            <div className="bg-card border border-border rounded-xl p-6 space-y-2">
-              <p className="text-3xl font-bold text-primary">50+</p>
-              <p className="text-sm text-muted-foreground">Healthcare Partners</p>
-            </div>
-            <div className="bg-card border border-border rounded-xl p-6 space-y-2">
-              <p className="text-3xl font-bold text-primary">24/7</p>
-              <p className="text-sm text-muted-foreground">Support Available</p>
-            </div>
+          <div>
+            <h3 className="text-xl font-semibold text-foreground mb-3">Our Approach</h3>
+            <p className="text-muted-foreground leading-relaxed">
+              Precision in every service, fast and reliable technical support, preventive maintenance solutions, trusted biomedical expertise, and a customer-focused approach define our commitment to healthcare facilities across Ahmedabad and Gujarat.
+            </p>
           </div>
         </div>
 
