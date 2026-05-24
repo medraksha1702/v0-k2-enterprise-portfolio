@@ -15,6 +15,8 @@ export function ContactForm() {
     issue: '',
   })
   const [submitted, setSubmitted] = useState(false)
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState<string | null>(null)
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target
@@ -22,16 +24,43 @@ export function ContactForm() {
       ...prev,
       [name]: value,
     }))
+    setError(null)
   }
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    console.log('Form submitted:', formData)
-    setSubmitted(true)
-    setTimeout(() => {
-      setSubmitted(false)
+    setLoading(true)
+    setError(null)
+
+    try {
+      const response = await fetch('/api/service-request', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      })
+
+      const data = await response.json()
+
+      if (!response.ok) {
+        setError(data.error || 'Failed to submit request. Please try again.')
+        setLoading(false)
+        return
+      }
+
+      setSubmitted(true)
       setFormData({ name: '', hospital: '', phone: '', equipment: '', issue: '' })
-    }, 3000)
+      
+      setTimeout(() => {
+        setSubmitted(false)
+      }, 5000)
+    } catch (err) {
+      setError('Network error. Please check your connection and try again.')
+      console.error('Form submission error:', err)
+    } finally {
+      setLoading(false)
+    }
   }
 
   return (
@@ -179,14 +208,22 @@ export function ContactForm() {
 
               <Button
                 type="submit"
-                className="w-full bg-primary hover:bg-primary/90 text-primary-foreground text-base font-semibold h-12"
+                disabled={loading || submitted}
+                className="w-full bg-primary hover:bg-primary/90 disabled:bg-primary/50 text-primary-foreground text-base font-semibold h-12 transition-all"
               >
-                {submitted ? '✓ Request Submitted' : 'Submit Service Request'}
+                {loading ? 'Submitting...' : submitted ? '✓ Request Submitted Successfully' : 'Submit Service Request'}
               </Button>
 
+              {error && (
+                <div className="bg-red-50 border border-red-200 text-red-700 text-sm rounded-lg p-4">
+                  {error}
+                </div>
+              )}
+
               {submitted && (
-                <div className="bg-primary/10 border border-primary/30 text-primary text-sm rounded-lg p-4">
-                  Thank you! We'll contact you shortly with a response.
+                <div className="bg-green-50 border border-green-200 text-green-700 text-sm rounded-lg p-4">
+                  <p className="font-semibold mb-1">Thank you for your service request!</p>
+                  <p>We've received your request and our team will contact you shortly at {formData.phone}.</p>
                 </div>
               )}
             </form>
