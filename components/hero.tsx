@@ -1,7 +1,7 @@
 'use client'
 
 import { Button } from '@/components/ui/button'
-import { ArrowRight, CheckCircle2 } from 'lucide-react'
+import { ArrowRight, CheckCircle2, Microscope, Beaker, Settings2, Cpu } from 'lucide-react'
 
 export function Hero() {
   return (
@@ -85,26 +85,29 @@ export function Hero() {
               {/* Featured Equipment Cards */}
               <div className="grid grid-cols-2 gap-4">
                 {[
-                  { name: 'CBC Analyzer', emoji: '🔬', gradient: 'from-blue-500/20 to-blue-600/10' },
-                  { name: 'Biochemistry', emoji: '⚗️', gradient: 'from-purple-500/20 to-purple-600/10' },
-                  { name: 'Microscope', emoji: '🔭', gradient: 'from-cyan-500/20 to-cyan-600/10' },
-                  { name: 'Centrifuge', emoji: '⚙️', gradient: 'from-orange-500/20 to-orange-600/10' },
-                ].map((item, i) => (
-                  <div
-                    key={i}
-                    className={`bg-gradient-to-br ${item.gradient} rounded-xl p-6 border border-primary/20 backdrop-blur-sm hover:border-primary/50 transition-all duration-300 cursor-pointer group hover:shadow-lg`}
-                  >
-                    <div className="text-4xl mb-3 group-hover:scale-110 transition-transform duration-300">{item.emoji}</div>
-                    <p className="text-sm font-semibold text-foreground group-hover:text-primary transition-colors">{item.name}</p>
-                    <p className="text-xs text-muted-foreground mt-2">Expert Service</p>
-                  </div>
-                ))}
+                  { name: 'CBC Analyzer', icon: Microscope, gradient: 'from-blue-500/20 to-blue-600/10' },
+                  { name: 'Biochemistry', icon: Beaker, gradient: 'from-purple-500/20 to-purple-600/10' },
+                  { name: 'Microscope', icon: Cpu, gradient: 'from-cyan-500/20 to-cyan-600/10' },
+                  { name: 'Centrifuge', icon: Settings2, gradient: 'from-orange-500/20 to-orange-600/10' },
+                ].map((item, i) => {
+                  const Icon = item.icon
+                  return (
+                    <div
+                      key={i}
+                      className={`bg-gradient-to-br ${item.gradient} rounded-xl p-6 border border-primary/20 backdrop-blur-sm hover:border-primary/50 transition-all duration-300 cursor-pointer group hover:shadow-lg`}
+                    >
+                      <Icon className="w-8 h-8 mb-3 text-primary group-hover:scale-110 transition-transform duration-300" />
+                      <p className="text-sm font-semibold text-foreground group-hover:text-primary transition-colors">{item.name}</p>
+                      <p className="text-xs text-muted-foreground mt-2">Expert Service</p>
+                    </div>
+                  )
+                })}
               </div>
 
               {/* Info Card */}
               <div className="bg-gradient-to-br from-primary/15 via-primary/5 to-transparent rounded-xl p-5 border border-primary/30 backdrop-blur-sm">
                 <div className="flex items-start gap-3">
-                  <div className="w-10 h-10 bg-primary/20 rounded-lg flex items-center justify-center flex-shrink-0 text-lg">✓</div>
+                  <CheckCircle2 className="w-6 h-6 text-primary flex-shrink-0 mt-0.5" />
                   <div className="space-y-1">
                     <p className="font-semibold text-foreground text-sm">Comprehensive Support</p>
                     <p className="text-xs text-muted-foreground leading-relaxed">Installation • Maintenance • Repair • Calibration</p>
