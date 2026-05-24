@@ -5,8 +5,8 @@ import { MessageCircle, X } from 'lucide-react'
 
 export function WhatsAppButton() {
   const [showNumber, setShowNumber] = useState(false)
-  const phoneNumber = '919724841765' // +91 97248 41765
-  const displayNumber = '+91 97248 41765'
+  const phoneNumber = '919510768056' // +91 9510768056
+  const displayNumber = '+91 9510768056'
   const message = 'Hello K² Enterprise, I need biomedical equipment support.'
   const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`
 
