@@ -23,9 +23,11 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    // Log the service request
+    const timestamp = new Date().toISOString()
+
+    // Log the service request locally
     console.log('[Service Request]', {
-      timestamp: new Date().toISOString(),
+      timestamp,
       name,
       hospital,
       phone,
@@ -33,7 +35,28 @@ export async function POST(request: NextRequest) {
       issue,
     })
 
-    // Try to send via webhook service if available
+    // Store in Google Sheets via Apps Script webhook if configured
+    if (process.env.GOOGLE_APPS_SCRIPT_WEBHOOK_URL) {
+      try {
+        await fetch(process.env.GOOGLE_APPS_SCRIPT_WEBHOOK_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            timestamp,
+            name,
+            hospital,
+            phone,
+            equipment,
+            issue,
+          }),
+        })
+      } catch (sheetsError) {
+        console.error('Google Sheets webhook error:', sheetsError)
+        // Don't fail the request if sheets integration fails
+      }
+    }
+
+    // Try to send via general webhook service if available
     if (process.env.WEBHOOK_URL) {
       try {
         await fetch(process.env.WEBHOOK_URL, {
@@ -48,11 +71,16 @@ export async function POST(request: NextRequest) {
       }
     }
 
-    // Return success response
+    // Return success response with WhatsApp option
     return NextResponse.json(
       {
         success: true,
         message: 'Service request submitted successfully. We will contact you shortly.',
+        whatsappReady: true,
+        whatsappData: {
+          phone: '919510768056',
+          message: `Hi K² Enterprise,\n\nName: ${name}\nFacility: ${hospital}\nEquipment: ${equipment}\nIssue: ${issue}`,
+        },
       },
       { status: 200 }
     )

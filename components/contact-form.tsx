@@ -17,6 +17,7 @@ export function ContactForm() {
   const [submitted, setSubmitted] = useState(false)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
+  const [whatsappData, setWhatsappData] = useState<{ phone: string; message: string } | null>(null)
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target
@@ -50,11 +51,15 @@ export function ContactForm() {
       }
 
       setSubmitted(true)
+      if (data.whatsappData) {
+        setWhatsappData(data.whatsappData)
+      }
       setFormData({ name: '', hospital: '', phone: '', equipment: '', issue: '' })
       
       setTimeout(() => {
         setSubmitted(false)
-      }, 5000)
+        setWhatsappData(null)
+      }, 8000)
     } catch (err) {
       setError('Network error. Please check your connection and try again.')
       console.error('Form submission error:', err)
@@ -221,9 +226,26 @@ export function ContactForm() {
               )}
 
               {submitted && (
-                <div className="bg-green-50 border border-green-200 text-green-700 text-sm rounded-lg p-4">
-                  <p className="font-semibold mb-1">Thank you for your service request!</p>
-                  <p>We've received your request and our team will contact you shortly at {formData.phone}.</p>
+                <div className="space-y-4">
+                  <div className="bg-green-50 border border-green-200 text-green-700 text-sm rounded-lg p-4">
+                    <p className="font-semibold mb-1">Thank you for your service request!</p>
+                    <p>We've received your request and our team will contact you shortly at {formData.phone}.</p>
+                  </div>
+                  
+                  {whatsappData && (
+                    <div className="bg-emerald-50 border border-emerald-200 text-emerald-900 rounded-lg p-4 space-y-3">
+                      <p className="font-semibold text-sm">You can also reach us directly on WhatsApp:</p>
+                      <a
+                        href={`https://wa.me/${whatsappData.phone}?text=${encodeURIComponent(whatsappData.message)}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-2 bg-emerald-500 hover:bg-emerald-600 text-white font-semibold py-2 px-4 rounded-lg text-sm transition-colors"
+                      >
+                        <span>💬</span>
+                        Open WhatsApp Chat
+                      </a>
+                    </div>
+                  )}
                 </div>
               )}
             </form>
