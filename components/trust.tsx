@@ -6,7 +6,7 @@ export function Trust() {
   const reasons = [
     {
       icon: Lightbulb,
-      title: '2+ Years Experience',
+      title: '7+ Years Experience',
       description: 'Professional biomedical engineering support with proven service expertise.'
     },
     {
