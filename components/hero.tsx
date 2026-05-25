@@ -12,8 +12,8 @@ export function Hero() {
         <div className="absolute top-0 right-0 w-96 h-96 bg-primary rounded-full blur-3xl"></div>
       </div>
 
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="space-y-8 max-w-2xl">
+      <div className="relative w-full px-4 sm:px-6 lg:px-8">
+        <div className="space-y-8 max-w-4xl mx-auto">
             <div className="space-y-4">
               <div className="inline-block">
                 <span className="text-sm font-semibold text-primary bg-primary/10 px-4 py-2 rounded-full">
