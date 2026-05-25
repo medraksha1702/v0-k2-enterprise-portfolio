@@ -2,6 +2,7 @@
 
 import { Button } from '@/components/ui/button'
 import { ArrowRight, CheckCircle2 } from 'lucide-react' // CheckCircle2 is still used in benefits
+import { Watermark } from './watermark'
 
 export function Hero() {
   return (
@@ -11,6 +12,9 @@ export function Hero() {
       <div className="absolute inset-0 opacity-5">
         <div className="absolute top-0 right-0 w-96 h-96 bg-primary rounded-full blur-3xl"></div>
       </div>
+
+      {/* Watermark */}
+      <Watermark text="Biomedical Engineering Expert" position="top-right" />
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">

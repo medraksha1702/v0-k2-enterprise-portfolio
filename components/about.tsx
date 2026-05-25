@@ -1,6 +1,7 @@
 'use client'
 
 import { Zap, Shield, Target, Lightbulb } from 'lucide-react'
+import { Watermark } from './watermark'
 
 export function About() {
   const highlights = [
@@ -27,7 +28,8 @@ export function About() {
   ]
 
   return (
-    <section id="about" className="py-20 md:py-28 bg-muted/30">
+    <section id="about" className="relative py-20 md:py-28 bg-muted/30">
+      <Watermark text="Trusted Healthcare Partner" position="bottom-right" />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="space-y-4 mb-16">
