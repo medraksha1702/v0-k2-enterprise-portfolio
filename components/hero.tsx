@@ -1,8 +1,7 @@
 'use client'
 
 import { Button } from '@/components/ui/button'
-import { ArrowRight, CheckCircle2 } from 'lucide-react' // CheckCircle2 is still used in benefits
-import { Watermark } from './watermark'
+import { ArrowRight, CheckCircle2 } from 'lucide-react'
 
 export function Hero() {
   return (
@@ -13,13 +12,8 @@ export function Hero() {
         <div className="absolute top-0 right-0 w-96 h-96 bg-primary rounded-full blur-3xl"></div>
       </div>
 
-      {/* Watermark */}
-      <Watermark text="Biomedical Engineering Expert" position="top-right" />
-
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-          {/* Left Content */}
-          <div className="space-y-8">
+        <div className="space-y-8 max-w-2xl">
             <div className="space-y-4">
               <div className="inline-block">
                 <span className="text-sm font-semibold text-primary bg-primary/10 px-4 py-2 rounded-full">
@@ -81,9 +75,6 @@ export function Hero() {
                 <p className="text-lg font-semibold text-foreground">k2biomedicalservice@gmail.com</p>
               </div>
             </div>
-          </div>
-
-
         </div>
       </div>
     </section>
