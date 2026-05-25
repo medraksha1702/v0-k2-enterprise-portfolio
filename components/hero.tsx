@@ -1,7 +1,7 @@
 'use client'
 
 import { Button } from '@/components/ui/button'
-import { ArrowRight, CheckCircle2 } from 'lucide-react'
+import { ArrowRight, CheckCircle2 } from 'lucide-react' // CheckCircle2 is still used in benefits
 
 export function Hero() {
   return (
@@ -79,37 +79,7 @@ export function Hero() {
             </div>
           </div>
 
-          {/* Right Visual - Info Card */}
-          <div className="relative hidden md:block">
-            <div className="bg-gradient-to-br from-primary/15 via-primary/5 to-transparent rounded-2xl p-8 border border-primary/30 backdrop-blur-sm h-full flex flex-col justify-center">
-              <div className="space-y-6">
-                <div className="flex items-start gap-4">
-                  <CheckCircle2 className="w-8 h-8 text-primary flex-shrink-0 mt-1" />
-                  <div className="space-y-2">
-                    <p className="font-semibold text-foreground text-lg">Comprehensive Support</p>
-                    <p className="text-muted-foreground leading-relaxed">Installation • Maintenance • Repair • Calibration</p>
-                  </div>
-                </div>
 
-                <div className="pt-6 border-t border-primary/20">
-                  <div className="space-y-4">
-                    <div>
-                      <p className="text-sm font-semibold text-primary uppercase tracking-wide mb-2">Professional Services</p>
-                      <p className="text-foreground leading-relaxed">We deliver expert biomedical engineering solutions with precision and dedication to healthcare facilities across Gujarat.</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Floating Badge */}
-              <div className="absolute -bottom-4 -right-4 bg-card border-2 border-primary rounded-full p-4 shadow-lg backdrop-blur-sm">
-                <div className="text-center">
-                  <p className="text-sm font-bold text-primary">7+ Years</p>
-                  <p className="text-xs text-muted-foreground font-medium">Expertise</p>
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
       </div>
     </section>
