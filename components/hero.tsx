@@ -34,7 +34,7 @@ export function Hero() {
   ]
 
   return (
-    <section className="relative py-20 md:py-28 overflow-hidden">
+    <section className="relative py-14 sm:py-20 md:py-28 overflow-hidden">
       {/* Background gradient + animated grid + ambient blobs */}
       <div className="absolute inset-0 bg-gradient-to-b from-primary/5 to-transparent"></div>
       <div className="bg-grid pointer-events-none absolute inset-0 opacity-[0.4] [mask-image:radial-gradient(ellipse_at_center,black,transparent_75%)]"></div>
@@ -46,7 +46,7 @@ export function Hero() {
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           {/* Left — Headline & CTAs */}
-          <div className="space-y-8 animate-fade-in-up">
+          <div className="min-w-0 space-y-8 animate-fade-in-up">
             <div className="space-y-5">
               <span className="inline-flex items-center gap-2 text-sm font-semibold text-primary bg-primary/10 px-4 py-2 rounded-full">
                 <span className="relative flex h-2 w-2">
@@ -57,7 +57,7 @@ export function Hero() {
               </span>
 
               <motion.h1
-                className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground text-balance leading-[1.1]"
+                className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-foreground text-balance leading-[1.1]"
                 style={{ fontFamily: 'var(--font-poppins)' }}
                 variants={headlineContainer}
                 initial="hidden"
@@ -98,11 +98,11 @@ export function Hero() {
             </div>
 
             {/* CTA Buttons — one consistent button style */}
-            <div className="flex flex-col sm:flex-row gap-4">
+            <div className="flex flex-col sm:flex-row flex-wrap gap-3 sm:gap-4">
               <Button
                 asChild
                 size="lg"
-                className="group bg-primary hover:bg-primary/90 text-primary-foreground shadow-lg shadow-primary/20"
+                className="group w-full sm:w-auto bg-primary hover:bg-primary/90 text-primary-foreground shadow-lg shadow-primary/20"
               >
                 <a href="#contact">
                   Request Service
@@ -112,7 +112,7 @@ export function Hero() {
               <Button
                 asChild
                 size="lg"
-                className="bg-emerald-500 hover:bg-emerald-600 text-white shadow-lg shadow-emerald-500/20"
+                className="w-full sm:w-auto bg-emerald-500 hover:bg-emerald-600 text-white shadow-lg shadow-emerald-500/20"
               >
                 <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer">
                   <MessageCircle className="w-4 h-4 mr-2" />
@@ -123,12 +123,12 @@ export function Hero() {
           </div>
 
           {/* Right — Contact / availability card */}
-          <div className="relative animate-fade-in-up" style={{ animationDelay: '150ms' }}>
+          <div className="relative min-w-0 animate-fade-in-up" style={{ animationDelay: '150ms' }}>
             {/* slow-rotating conic glow behind the card */}
             <div className="pointer-events-none absolute -inset-px overflow-hidden rounded-3xl">
               <div className="animate-spin-slow absolute left-1/2 top-1/2 h-[140%] w-[140%] -translate-x-1/2 -translate-y-1/2 opacity-30 [background:conic-gradient(from_0deg,transparent,var(--primary),transparent_40%)]" />
             </div>
-            <div className="relative rounded-3xl border border-border bg-card/80 backdrop-blur-sm p-8 shadow-xl shadow-primary/5">
+            <div className="relative rounded-3xl border border-border bg-card/80 backdrop-blur-sm p-6 sm:p-8 shadow-xl shadow-primary/5">
               {/* gradient top accent */}
               <div className="pointer-events-none absolute inset-x-0 -top-px h-px bg-gradient-to-r from-transparent via-primary/50 to-transparent" />
 
@@ -177,7 +177,7 @@ export function Hero() {
                   </div>
                   <div className="min-w-0">
                     <p className="text-xs font-semibold text-muted-foreground uppercase">Email</p>
-                    <p className="text-base font-semibold text-foreground truncate">k2biomedicalservice@gmail.com</p>
+                    <p className="text-sm sm:text-base font-semibold text-foreground break-all">k2biomedicalservice@gmail.com</p>
                   </div>
                 </a>
               </div>

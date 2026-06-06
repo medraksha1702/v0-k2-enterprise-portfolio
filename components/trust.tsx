@@ -28,7 +28,7 @@ export function Trust() {
   ]
 
   return (
-    <section className="relative py-20 md:py-28 bg-secondary/5 overflow-hidden">
+    <section className="relative py-14 sm:py-20 md:py-28 bg-secondary/5 overflow-hidden">
       {/* ambient floating blobs */}
       <div className="pointer-events-none absolute inset-0 opacity-[0.06]">
         <div className="absolute -top-10 left-1/4 w-80 h-80 bg-primary rounded-full blur-3xl animate-float"></div>

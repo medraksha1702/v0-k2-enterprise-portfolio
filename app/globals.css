@@ -120,8 +120,17 @@
   * {
     @apply border-border outline-ring/50;
   }
+  html {
+    scroll-behavior: smooth;
+    /* offset anchor targets so the sticky header doesn't cover them */
+    scroll-padding-top: 5rem;
+    /* clip stray horizontal overflow from decorative/animated elements
+       without breaking the sticky header (unlike overflow-x: hidden) */
+    overflow-x: clip;
+  }
   body {
     @apply bg-background text-foreground;
+    overflow-x: clip;
   }
 }
 

@@ -21,7 +21,7 @@ export function About() {
   ]
 
   return (
-    <section id="about" className="relative py-20 md:py-28 bg-muted/30 overflow-hidden">
+    <section id="about" className="relative py-14 sm:py-20 md:py-28 bg-muted/30 overflow-hidden">
       <Watermark text="Trusted Healthcare Partner" position="bottom-right" />
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">

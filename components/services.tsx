@@ -70,7 +70,7 @@ export function Services() {
   ]
 
   return (
-    <section id="services" className="relative py-20 md:py-28">
+    <section id="services" className="relative py-14 sm:py-20 md:py-28 overflow-x-clip">
       <Watermark text="Laboratory Equipment Specialists" position="bottom-left" />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
