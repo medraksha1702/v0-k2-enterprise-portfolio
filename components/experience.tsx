@@ -1,6 +1,7 @@
 'use client'
 
-import { Award, Building2, GraduationCap } from 'lucide-react'
+import { Building2 } from 'lucide-react'
+import { Reveal } from './reveal'
 
 export function Experience() {
   const experiences = [
@@ -34,66 +35,42 @@ export function Experience() {
     },
   ]
 
-  const competencies = [
-    'Biomedical Equipment Management',
-    'Procurement & Operations',
-    'Inventory Management',
-    'NABL/NABH Audit Documentation',
-    'Technical Staff Training',
-    'Troubleshooting & Diagnostics',
-    'Leadership & Planning',
-    'Component-Level Repair',
-  ]
-
-  const achievements = [
-    {
-      rank: '1st Rank',
-      title: 'Paper Presentation',
-      event: 'CONVERGENCE 2018',
-    },
-    {
-      rank: '1st Rank',
-      title: 'Poster Presentation',
-      event: 'CONVERGENCE 2018',
-    },
-    {
-      rank: '2nd Rank',
-      title: 'GNU SciTechFest 2018',
-      event: 'Technical Competition',
-    },
-  ]
-
   return (
     <section id="experience" className="py-20 md:py-28 bg-muted/30">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="space-y-4 mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground text-balance" style={{ fontFamily: 'var(--font-poppins)' }}>
-            Our Working Process
-          </h2>
-          <p className="text-lg text-muted-foreground max-w-2xl">
-            A systematic, professional approach to biomedical equipment service and support.
-          </p>
-        </div>
+        <Reveal>
+          <div className="space-y-4 mb-16">
+            <span className="inline-block text-sm font-semibold text-primary bg-primary/10 px-4 py-1.5 rounded-full">
+              How We Work
+            </span>
+            <h2 className="text-3xl md:text-4xl font-bold text-foreground text-balance" style={{ fontFamily: 'var(--font-poppins)' }}>
+              Our Working Process
+            </h2>
+            <p className="text-lg text-muted-foreground max-w-2xl">
+              A systematic, professional approach to biomedical equipment service and support.
+            </p>
+          </div>
+        </Reveal>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           {/* Service Process Timeline */}
           <div className="space-y-6">
             <h3 className="text-2xl font-bold text-foreground mb-8">Service Steps</h3>
-            {experiences.map((exp, i) => {
-              const Icon = exp.icon
-              return (
-                <div key={i} className="relative pl-8 border-l-2 border-primary/30 pb-8 last:pb-0">
-                  <div className="absolute -left-4 top-0 w-6 h-6 rounded-full bg-primary border-4 border-background"></div>
-                  <div className="space-y-2">
-                    <p className="text-xs font-semibold text-primary uppercase">{exp.period}</p>
+            {experiences.map((exp, i) => (
+              <Reveal key={i} delay={i * 90} variant="up">
+                <div className="relative pl-10 border-l-2 border-primary/30 pb-8 last:pb-0">
+                  <div className="absolute -left-[15px] top-0 w-7 h-7 rounded-full bg-primary text-primary-foreground border-4 border-background flex items-center justify-center text-xs font-bold">
+                    {exp.period}
+                  </div>
+                  <div className="space-y-1.5">
                     <h4 className="text-lg font-semibold text-foreground">{exp.title}</h4>
-                    <p className="text-sm text-muted-foreground font-medium">{exp.company}</p>
-                    <p className="text-sm text-muted-foreground leading-relaxed pt-2">{exp.description}</p>
+                    <p className="text-sm text-primary font-medium">{exp.company}</p>
+                    <p className="text-sm text-muted-foreground leading-relaxed pt-1">{exp.description}</p>
                   </div>
                 </div>
-              )
-            })}
+              </Reveal>
+            ))}
           </div>
 
           {/* Right Column - About Us */}

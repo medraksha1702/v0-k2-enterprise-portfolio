@@ -152,3 +152,268 @@
 .animate-fade-in {
   animation: fadeIn 0.6s ease-out;
 }
+
+/* ---- Scroll-triggered reveal (used by <Reveal />) ---- */
+.reveal {
+  opacity: 0;
+  transition:
+    opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.reveal-up {
+  transform: translateY(28px);
+}
+
+.reveal-scale {
+  transform: scale(0.96);
+}
+
+.reveal-left {
+  transform: translateX(-48px);
+}
+
+.reveal-right {
+  transform: translateX(48px);
+}
+
+.reveal[data-visible='true'] {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* ---- Modern card hover lift ---- */
+.card-hover {
+  transition:
+    transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.3s ease,
+    border-color 0.3s ease;
+}
+
+.card-hover:hover {
+  transform: translateY(-4px);
+}
+
+/* ---- Subtle ambient float (decorative blobs) ---- */
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-14px);
+  }
+}
+
+.animate-float {
+  animation: float 7s ease-in-out infinite;
+}
+
+/* ---- Animated accent line with a light sweeping left -> right ---- */
+.accent-line {
+  position: relative;
+  height: 3px;
+  width: 80px;
+  border-radius: 9999px;
+  background: color-mix(in srgb, var(--primary) 20%, transparent);
+  overflow: hidden;
+}
+
+.accent-line::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  width: 40%;
+  border-radius: 9999px;
+  background: linear-gradient(to right, transparent, var(--primary), transparent);
+  animation: line-sweep 2.4s ease-in-out infinite;
+}
+
+@keyframes line-sweep {
+  0% {
+    transform: translateX(-120%);
+  }
+  100% {
+    transform: translateX(320%);
+  }
+}
+
+/* ---- Scrolling keyword marquee (left -> right loop) ---- */
+.marquee {
+  display: flex;
+  width: max-content;
+  animation: marquee 30s linear infinite;
+}
+
+.marquee-track:hover .marquee {
+  animation-play-state: paused;
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(-50%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .accent-line::after,
+  .marquee {
+    animation: none;
+  }
+}
+
+/* ---- Animated panning grid backdrop ---- */
+.bg-grid {
+  background-image:
+    linear-gradient(to right, color-mix(in srgb, var(--primary) 12%, transparent) 1px, transparent 1px),
+    linear-gradient(to bottom, color-mix(in srgb, var(--primary) 12%, transparent) 1px, transparent 1px);
+  background-size: 44px 44px;
+  animation: grid-pan 18s linear infinite;
+}
+
+@keyframes grid-pan {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: 44px 44px;
+  }
+}
+
+/* ---- Slow-rotating conic glow ---- */
+.animate-spin-slow {
+  animation: spin-slow 14s linear infinite;
+}
+
+@keyframes spin-slow {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ---- Shimmer sweep across an element ---- */
+.shimmer {
+  position: relative;
+  overflow: hidden;
+}
+
+.shimmer::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    120deg,
+    transparent 30%,
+    color-mix(in srgb, var(--primary) 18%, transparent) 50%,
+    transparent 70%
+  );
+  transform: translateX(-100%);
+  animation: shimmer 3.5s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  to {
+    transform: translateX(100%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bg-grid,
+  .animate-spin-slow,
+  .shimmer::before {
+    animation: none;
+  }
+}
+
+/* ---- Slogan: a highlight that flows left -> right, looping ---- */
+.slogan-flow,
+.slogan-flow-light {
+  background-size: 250% 100%;
+  background-position: 100% 0;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  animation: slogan-flow 4s linear infinite;
+}
+
+/* on light backgrounds */
+.slogan-flow {
+  background-image: linear-gradient(
+    90deg,
+    var(--muted-foreground) 0%,
+    var(--muted-foreground) 35%,
+    var(--primary) 50%,
+    var(--muted-foreground) 65%,
+    var(--muted-foreground) 100%
+  );
+}
+
+/* on dark backgrounds (e.g. footer) */
+.slogan-flow-light {
+  background-image: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.55) 0%,
+    rgba(255, 255, 255, 0.55) 35%,
+    rgba(255, 255, 255, 1) 50%,
+    rgba(255, 255, 255, 0.55) 65%,
+    rgba(255, 255, 255, 0.55) 100%
+  );
+}
+
+@keyframes slogan-flow {
+  from {
+    background-position: 100% 0;
+  }
+  to {
+    background-position: -150% 0;
+  }
+}
+
+/* ---- Continuously flowing gradient text (e.g. hero "Precision") ---- */
+.text-gradient-flow {
+  background-image: linear-gradient(90deg, var(--primary), var(--secondary), var(--primary));
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  animation: gradient-flow 4s linear infinite;
+}
+
+@keyframes gradient-flow {
+  to {
+    background-position: 200% center;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .text-gradient-flow {
+    animation: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .slogan-flow {
+    animation: none;
+    color: var(--muted-foreground);
+    -webkit-text-fill-color: var(--muted-foreground);
+  }
+  .slogan-flow-light {
+    animation: none;
+    color: rgba(255, 255, 255, 0.7);
+    -webkit-text-fill-color: rgba(255, 255, 255, 0.7);
+  }
+}

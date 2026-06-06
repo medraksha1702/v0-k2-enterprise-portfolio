@@ -22,12 +22,13 @@ export function Footer() {
           <div className="space-y-4">
             <Link href="#" className="flex items-center gap-2">
               <div className="w-8 h-8 bg-white/20 rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold text-sm">K2</span>
+                <span className="text-white font-bold text-sm">K²</span>
               </div>
-              <span className="font-bold text-white">K2 Enterprise</span>
+              <span className="font-bold text-white">Enterprise</span>
             </Link>
             <p className="text-sm text-white/70 leading-relaxed">
-              Where Precision Meets Dedication. Professional Biomedical Equipment Service & Support.
+              <span className="slogan-flow-light font-semibold">Where Precision Meets Dedication.</span>{' '}
+              Professional Biomedical Equipment Service & Support.
             </p>
           </div>
 
@@ -52,11 +53,11 @@ export function Footer() {
           <div className="space-y-4">
             <h3 className="font-semibold text-white">Key Services</h3>
             <ul className="space-y-2 text-sm text-white/70">
-              <li>CBC Analyzer Service</li>
-              <li>Biochemistry Analyzer Support</li>
-              <li>Microscope Maintenance</li>
-              <li>Centrifuge Service</li>
+              <li>Installation & Commissioning</li>
               <li>Preventive Maintenance</li>
+              <li>Breakdown Repair & Troubleshooting</li>
+              <li>Calibration & Performance Verification</li>
+              <li>Annual Maintenance Contracts (AMC)</li>
             </ul>
           </div>
 

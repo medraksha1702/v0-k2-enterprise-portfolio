@@ -7,10 +7,15 @@ import { Experience } from '@/components/experience'
 import { ContactForm } from '@/components/contact-form'
 import { Footer } from '@/components/footer'
 import { WhatsAppButton } from '@/components/whatsapp-button'
+import { ScrollProgress } from '@/components/scroll-progress'
+import { ScrollToTop } from '@/components/scroll-to-top'
+import { TopBanner } from '@/components/top-banner'
 
 export default function Home() {
   return (
     <main className="min-h-screen bg-background">
+      <ScrollProgress />
+      <TopBanner />
       <Header />
       <Hero />
       <About />
@@ -20,6 +25,7 @@ export default function Home() {
       <ContactForm />
       <Footer />
       <WhatsAppButton />
+      <ScrollToTop />
     </main>
   )
 }
