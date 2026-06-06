@@ -4,11 +4,11 @@ import {
   Wrench,
   CheckCircle,
   Zap,
-  BarChart3,
   Gauge,
   Settings,
   CalendarCheck,
   ClipboardCheck,
+  FlaskConical,
 } from 'lucide-react'
 import { Watermark } from './watermark'
 import { Reveal } from './reveal'
@@ -16,6 +16,11 @@ import { Tilt } from './tilt'
 
 export function Services() {
   const services = [
+    {
+      icon: FlaskConical,
+      title: 'Complete Lab Setup',
+      description: 'End-to-end setup guidance — site planning, layout, equipment selection, and operational readiness for new and expanding healthcare facilities.',
+    },
     {
       icon: Settings,
       title: 'Equipment Installation & Commissioning',
@@ -42,11 +47,6 @@ export function Services() {
       description: 'Detailed equipment inspection and technical assessment to identify performance issues, safety concerns, and maintenance requirements.',
     },
     {
-      icon: BarChart3,
-      title: 'Laboratory Equipment Support',
-      description: 'Comprehensive technical support for diagnostic and laboratory systems including servicing, optimization, and operational assistance.',
-    },
-    {
       icon: Zap,
       title: 'Emergency Technical Assistance',
       description: 'Quick-response biomedical support for urgent equipment issues and critical operational interruptions.',
@@ -54,7 +54,7 @@ export function Services() {
     {
       icon: CheckCircle,
       title: 'Annual Maintenance Contract (AMC) Services',
-      description: 'Customized AMC solutions including routine servicing, preventive maintenance, priority support, and technical documentation.',
+      description: 'Customized annual contracts covering routine servicing, scheduled upkeep, priority response, and complete technical documentation.',
     },
   ]
 
@@ -111,27 +111,27 @@ export function Services() {
           {services.map((service, i) => {
             const Icon = service.icon
             return (
-              <Reveal key={i} delay={(i % 4) * 70} variant="right" className="h-full">
+              <Reveal key={i} delay={(i % 4) * 60} variant="right" className="h-full">
                 <Tilt className="h-full">
-                  <div className="group relative h-full overflow-hidden bg-card border border-border rounded-2xl p-6 transition-[border-color,box-shadow] duration-300 hover:border-primary/50 hover:shadow-lg hover:shadow-primary/5">
+                  <div className="group relative h-full overflow-hidden bg-card border border-border rounded-xl p-4 transition-[border-color,box-shadow] duration-300 hover:border-primary/50 hover:shadow-md hover:shadow-primary/5">
                     {/* gradient glow on hover */}
-                    <div className="pointer-events-none absolute -right-8 -top-8 h-24 w-24 rounded-full bg-primary/10 opacity-0 blur-2xl transition-opacity duration-500 group-hover:opacity-100" />
+                    <div className="pointer-events-none absolute -right-6 -top-6 h-20 w-20 rounded-full bg-primary/10 opacity-0 blur-2xl transition-opacity duration-500 group-hover:opacity-100" />
 
-                    {/* top row: icon + index badge */}
-                    <div className="relative flex items-start justify-between mb-4">
-                      <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-primary/15 to-primary/5 ring-1 ring-primary/10 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                        <Icon className="w-6 h-6 text-primary" />
+                    {/* header: icon + title inline + index */}
+                    <div className="relative flex items-center gap-3 mb-2">
+                      <div className="w-9 h-9 shrink-0 rounded-lg bg-gradient-to-br from-primary/15 to-primary/5 ring-1 ring-primary/10 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                        <Icon className="w-[18px] h-[18px] text-primary" />
                       </div>
+                      <h3 className="flex-1 text-sm font-semibold text-foreground leading-snug">{service.title}</h3>
                       <span
-                        className="text-sm font-bold text-primary/30 group-hover:text-primary/60 transition-colors tabular-nums"
+                        className="text-xs font-bold text-primary/30 group-hover:text-primary/60 transition-colors tabular-nums"
                         style={{ fontFamily: 'var(--font-poppins)' }}
                       >
                         {String(i + 1).padStart(2, '0')}
                       </span>
                     </div>
 
-                    <h3 className="relative text-base font-semibold text-foreground leading-snug mb-2">{service.title}</h3>
-                    <p className="relative text-sm text-muted-foreground leading-relaxed">{service.description}</p>
+                    <p className="relative text-[13px] text-muted-foreground leading-relaxed">{service.description}</p>
 
                     {/* animated bottom accent */}
                     <span className="pointer-events-none absolute bottom-0 left-0 h-0.5 w-0 bg-gradient-to-r from-primary to-secondary transition-all duration-500 group-hover:w-full" />

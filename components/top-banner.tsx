@@ -9,7 +9,6 @@ export function TopBanner() {
     'Serving Hospitals, Labs & Diagnostic Centers',
     'Installation · Maintenance · Calibration · Repair',
     'Pan-India Service Coverage',
-    'Call +91 9510768056',
   ]
 
   return (

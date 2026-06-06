@@ -8,7 +8,7 @@ import { CountUp } from './count-up'
 export function About() {
   const stats = [
     { icon: Award, value: '7+', label: 'Years of Experience' },
-    { icon: Boxes, value: '4+', label: 'Brands Supported' },
+    { icon: Boxes, value: 'Multi-Brand', label: 'Equipment Expertise' },
     { icon: Clock, value: '24×7', label: 'Emergency Support' },
     { icon: MapPin, value: 'Pan-India', label: 'Service Coverage' },
   ]
