@@ -6,6 +6,7 @@ import { Reveal } from './reveal'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { motion } from 'framer-motion'
+import { ShaderBackground } from './ui/shader-background'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -106,17 +107,19 @@ export function Experience() {
     }
   }, [])
 
-  // Subtle floating biomedical icons (2-5% opacity)
+  // Floating icons — visible on all screens
   const floatingIcons = [
-    { Icon: Search, top: '15%', left: '8%', size: 30, speed: 12 },
-    { Icon: Cpu, top: '65%', left: '10%', size: 28, speed: 10 },
-    { Icon: CheckCircle, top: '20%', left: '88%', size: 32, speed: 14 },
-    { Icon: Clock, top: '75%', left: '90%', size: 26, speed: 11 },
+    { Icon: Search, top: '12%', left: '2%', size: 20, speed: 12 },
+    { Icon: Cpu, top: '65%', left: '3%', size: 18, speed: 10 },
+    { Icon: CheckCircle, top: '18%', left: '89%', size: 22, speed: 14 },
+    { Icon: Clock, top: '75%', left: '91%', size: 18, speed: 11 },
   ]
 
   return (
-    <section id="experience" className="py-20 sm:py-28 md:py-36 bg-background relative overflow-hidden">
-      
+    <section id="experience" className="py-20 sm:py-28 md:py-36 relative overflow-hidden dark" style={{ backgroundColor: '#003a3b' }}>
+      {/* WebGL Animated Shader Background */}
+      <ShaderBackground opacity={0.45} />
+
       {/* 1. Double-Layer Blueprint Grid Overlay (Subtle 2.5% opacity, clinical engineering look) */}
       <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(0,109,111,0.025)_1px,transparent_1px),linear-gradient(to_bottom,rgba(0,109,111,0.025)_1px,transparent_1px)] bg-[size:40px_40px] pointer-events-none z-0" />
       <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(0,109,111,0.01)_1px,transparent_1px),linear-gradient(to_bottom,rgba(0,109,111,0.01)_1px,transparent_1px)] bg-[size:8px_8px] pointer-events-none z-0" />
@@ -125,18 +128,10 @@ export function Experience() {
       {floatingIcons.map(({ Icon, top, left, size, speed }, index) => (
         <motion.div
           key={`icon-${index}`}
-          className="absolute text-primary/5 pointer-events-none z-0 hidden sm:block"
-          style={{ top, left }}
-          animate={{
-            y: [-12, 12, -12],
-            rotate: [-8, 8, -8],
-          }}
-          transition={{
-            duration: speed,
-            repeat: Infinity,
-            ease: 'easeInOut',
-            delay: index * 0.5,
-          }}
+          className="absolute pointer-events-none z-0"
+          style={{ top, left, color: 'rgba(0,242,254,0.1)' }}
+          animate={{ y: [-10, 10, -10], rotate: [-6, 6, -6] }}
+          transition={{ duration: speed, repeat: Infinity, ease: 'easeInOut', delay: index * 0.5 }}
         >
           <Icon size={size} strokeWidth={1} />
         </motion.div>

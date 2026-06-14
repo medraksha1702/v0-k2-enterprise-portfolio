@@ -7,6 +7,7 @@ import { Textarea } from '@/components/ui/textarea'
 import { Mail, Phone, MapPin, Send, HelpCircle, Activity } from 'lucide-react'
 import { Reveal } from './reveal'
 import { motion } from 'framer-motion'
+import { ShaderBackground } from './ui/shader-background'
 
 export function ContactForm() {
   const [formData, setFormData] = useState({
@@ -70,17 +71,19 @@ export function ContactForm() {
     }
   }
 
-  // Subtle floating biomedical icons (2-5% opacity)
+  // Floating icons — visible on all screens, small on mobile
   const floatingIcons = [
-    { Icon: Mail, top: '15%', left: '7%', size: 28, speed: 12 },
-    { Icon: Phone, top: '65%', left: '9%', size: 30, speed: 10 },
-    { Icon: MapPin, top: '22%', left: '88%', size: 26, speed: 15 },
-    { Icon: Send, top: '78%', left: '90%', size: 32, speed: 13 },
+    { Icon: Mail, top: '12%', left: '2%', size: 18, speed: 12 },
+    { Icon: Phone, top: '65%', left: '3%', size: 20, speed: 10 },
+    { Icon: MapPin, top: '20%', left: '89%', size: 18, speed: 15 },
+    { Icon: Send, top: '78%', left: '91%', size: 22, speed: 13 },
   ]
 
   return (
-    <section id="contact" className="py-20 sm:py-28 md:py-36 bg-background relative overflow-hidden">
-      
+    <section id="contact" className="py-20 sm:py-28 md:py-36 relative overflow-hidden" style={{ backgroundColor: '#f0fafa' }}>
+      {/* WebGL Animated Shader Background */}
+      <ShaderBackground opacity={0.5} />
+
       {/* 1. Double-Layer Blueprint Grid Overlay (Subtle 2.5% opacity, clinical engineering look) */}
       <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(0,109,111,0.025)_1px,transparent_1px),linear-gradient(to_bottom,rgba(0,109,111,0.025)_1px,transparent_1px)] bg-[size:40px_40px] pointer-events-none z-0" />
       <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(0,109,111,0.01)_1px,transparent_1px),linear-gradient(to_bottom,rgba(0,109,111,0.01)_1px,transparent_1px)] bg-[size:8px_8px] pointer-events-none z-0" />
@@ -89,18 +92,10 @@ export function ContactForm() {
       {floatingIcons.map(({ Icon, top, left, size, speed }, index) => (
         <motion.div
           key={`icon-${index}`}
-          className="absolute text-primary/5 pointer-events-none z-0 hidden sm:block"
+          className="absolute text-primary/[0.07] pointer-events-none z-0"
           style={{ top, left }}
-          animate={{
-            y: [-12, 12, -12],
-            rotate: [-8, 8, -8],
-          }}
-          transition={{
-            duration: speed,
-            repeat: Infinity,
-            ease: 'easeInOut',
-            delay: index * 0.5,
-          }}
+          animate={{ y: [-10, 10, -10], rotate: [-6, 6, -6] }}
+          transition={{ duration: speed, repeat: Infinity, ease: 'easeInOut', delay: index * 0.5 }}
         >
           <Icon size={size} strokeWidth={1} />
         </motion.div>
@@ -118,10 +113,10 @@ export function ContactForm() {
                 <span className="inline-block text-sm font-semibold text-primary bg-primary/10 border border-primary/20 px-4 py-1.5 rounded-full">
                   Connect With Us
                 </span>
-                <h2 className="text-3xl md:text-5xl font-black text-foreground tracking-tight" style={{ fontFamily: 'var(--font-poppins)' }}>
+                <h2 className="text-3xl md:text-5xl font-black tracking-tight" style={{ fontFamily: 'var(--font-poppins)', color: '#00292a' }}>
                   Request Service
                 </h2>
-                <p className="text-lg text-muted-foreground leading-relaxed font-light">
+                <p className="text-lg leading-relaxed font-light" style={{ color: '#1a4040' }}>
                   Submit a ticket to our technical dispatch unit. Our certified field specialists respond promptly to clinical queries.
                 </p>
               </div>

@@ -2,11 +2,19 @@
 
 import { useEffect, useRef, useState } from 'react'
 import * as THREE from 'three'
+import { useTheme } from 'next-themes'
 
 export function Hero3D() {
   const containerRef = useRef<HTMLDivElement>(null)
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const [loading, setLoading] = useState(true)
+
+  const { resolvedTheme } = useTheme()
+  const themeRef = useRef(resolvedTheme)
+
+  useEffect(() => {
+    themeRef.current = resolvedTheme
+  }, [resolvedTheme])
 
   useEffect(() => {
     if (!canvasRef.current || !containerRef.current) return
@@ -17,7 +25,7 @@ export function Hero3D() {
     let width = container.clientWidth || 500
     let height = container.clientHeight || 500
 
-    // WebGL Renderer
+    // WebGL Renderer with performance configurations
     const renderer = new THREE.WebGLRenderer({
       canvas,
       antialias: true,
@@ -30,180 +38,256 @@ export function Hero3D() {
     // Scene
     const scene = new THREE.Scene()
 
-    // Camera
+    // Camera (angled looking down at the hologram)
     const camera = new THREE.PerspectiveCamera(40, width / height, 0.1, 100)
-    camera.position.set(0, 0, 10)
+    camera.position.set(0, 1.2, 5.0)
+    camera.lookAt(new THREE.Vector3(0, 0, 0))
     scene.add(camera)
 
-    // Lighting (clinical, bright highlights)
-    const ambientLight = new THREE.AmbientLight(0xffffff, 1.0)
+    // Lights
+    const ambientLight = new THREE.AmbientLight(0xffffff, 0.8)
     scene.add(ambientLight)
 
-    const dirLight1 = new THREE.DirectionalLight(0xffffff, 2.5)
-    dirLight1.position.set(5, 10, 7)
-    scene.add(dirLight1)
+    const dirLight = new THREE.DirectionalLight(0xffffff, 1.5)
+    dirLight.position.set(5, 8, 5)
+    scene.add(dirLight)
 
-    const dirLight2 = new THREE.DirectionalLight(0x00f2fe, 1.5)
-    dirLight2.position.set(-5, -5, 5)
-    scene.add(dirLight2)
+    // Central glowing point light for holographic glow
+    const glowLight = new THREE.PointLight(0x00f2fe, 2, 6)
+    glowLight.position.set(0, 0, 0)
+    scene.add(glowLight)
 
-    // Screen Glow Point Light (syncs with heartbeat)
-    const screenLight = new THREE.PointLight(0x22c55e, 0.5, 5)
-    screenLight.position.set(0, 0, 0.5)
-    scene.add(screenLight)
+    // Main Hologram Group (tilts with mouse parallax)
+    const holoGroup = new THREE.Group()
+    holoGroup.position.y = -0.2 // center vertically
+    scene.add(holoGroup)
 
-    // Main Monitor Group (for floating & rotation)
-    const monitorGroup = new THREE.Group()
-    scene.add(monitorGroup)
+    // --- 3D HOLOGRAPHIC MEDICAL SYSTEM ---
 
-    // --- PROCEDURAL 3D MEDICAL MONITOR ---
-
-    // 1. Casing / Body (Tesla/Apple clinical silver-gray rounded look)
-    const bodyGeom = new THREE.BoxGeometry(3.6, 2.6, 0.4)
-    const bodyMat = new THREE.MeshStandardMaterial({
-      color: 0x334155, // Slate gray
-      roughness: 0.2,
-      metalness: 0.7,
-    })
-    const bodyMesh = new THREE.Mesh(bodyGeom, bodyMat)
-    monitorGroup.add(bodyMesh)
-
-    // Back Panel (recessed connector section)
-    const backGeom = new THREE.BoxGeometry(3.0, 2.0, 0.3)
-    const backMesh = new THREE.Mesh(backGeom, bodyMat)
-    backMesh.position.z = -0.3
-    monitorGroup.add(backMesh)
-
-    // Stand Mount Base
-    const standGeom = new THREE.CylinderGeometry(0.2, 0.3, 0.6, 16)
-    const standMesh = new THREE.Mesh(standGeom, bodyMat)
-    standMesh.position.y = -1.5
-    monitorGroup.add(standMesh)
-
-    // 2. Bezel & Screen Face
-    const screenGeom = new THREE.BoxGeometry(3.3, 2.3, 0.05)
-    const screenMat = new THREE.MeshStandardMaterial({
-      color: 0x050b14, // Deep black screen
+    // Materials (Initial Colors)
+    const crossMat = new THREE.MeshStandardMaterial({
+      color: 0x00f2fe,
       roughness: 0.1,
-      metalness: 0.9,
-    })
-    const screenMesh = new THREE.Mesh(screenGeom, screenMat)
-    screenMesh.position.z = 0.21
-    monitorGroup.add(screenMesh)
-
-    // 3. Grid Lines on Screen (diagnostic helper look)
-    const gridHelperGroup = new THREE.Group()
-    const gridCols = 12
-    const gridRows = 8
-    const gridMat = new THREE.LineBasicMaterial({
-      color: 0x112233,
+      metalness: 0.1,
       transparent: true,
-      opacity: 0.4,
+      opacity: 0.75,
+      emissive: 0x00f2fe,
+      emissiveIntensity: 1.2,
+      side: THREE.DoubleSide,
     })
 
-    // Vertical grid lines
-    for (let i = 1; i < gridCols; i++) {
-      const x = -1.65 + (i * 3.3) / gridCols
-      const points = [new THREE.Vector3(x, -1.15, 0.24), new THREE.Vector3(x, 1.15, 0.24)]
-      const geom = new THREE.BufferGeometry().setFromPoints(points)
-      gridHelperGroup.add(new THREE.Line(geom, gridMat))
-    }
-    // Horizontal grid lines
-    for (let i = 1; i < gridRows; i++) {
-      const y = -1.15 + (i * 2.3) / gridRows
-      const points = [new THREE.Vector3(-1.65, y, 0.24), new THREE.Vector3(1.65, y, 0.24)]
-      const geom = new THREE.BufferGeometry().setFromPoints(points)
-      gridHelperGroup.add(new THREE.Line(geom, gridMat))
-    }
-    monitorGroup.add(gridHelperGroup)
-
-    // 4. Multiple Blinking Bezel LEDs
-    const ledGeom = new THREE.SphereGeometry(0.05, 12, 12)
-    
-    // LED 1: Power indicator (solid/pulse green)
-    const ledPowerMat = new THREE.MeshBasicMaterial({ color: 0x22c55e })
-    const ledPower = new THREE.Mesh(ledGeom, ledPowerMat)
-    ledPower.position.set(1.4, 1.1, 0.22)
-    monitorGroup.add(ledPower)
-
-    // LED 2: Pulse sync indicator (flashes green on beat)
-    const ledSyncMat = new THREE.MeshBasicMaterial({ color: 0x050b14 })
-    const ledSync = new THREE.Mesh(ledGeom, ledSyncMat)
-    ledSync.position.set(1.52, 1.1, 0.22)
-    monitorGroup.add(ledSync)
-
-    // LED 3: Alarm indicator (flashes yellow/red)
-    const ledAlarmMat = new THREE.MeshBasicMaterial({ color: 0xca8a04 })
-    const ledAlarm = new THREE.Mesh(ledGeom, ledAlarmMat)
-    ledAlarm.position.set(1.28, 1.1, 0.22)
-    monitorGroup.add(ledAlarm)
-
-    // 5. Screen Heart Pulse Icon (procedural mesh)
-    const heartShape = new THREE.Shape()
-    heartShape.moveTo(0, 0)
-    heartShape.bezierCurveTo(0, 0.1, -0.1, 0.2, -0.2, 0.2)
-    heartShape.bezierCurveTo(-0.35, 0.2, -0.4, 0.05, -0.4, -0.1)
-    heartShape.bezierCurveTo(-0.4, -0.25, -0.2, -0.4, 0, -0.5)
-    heartShape.bezierCurveTo(0.2, -0.4, 0.4, -0.25, 0.4, -0.1)
-    heartShape.bezierCurveTo(0.4, 0.05, 0.35, 0.2, 0.2, 0.2)
-    heartShape.bezierCurveTo(0.1, 0.2, 0, 0.1, 0, 0)
-
-    const heartGeom = new THREE.ShapeGeometry(heartShape)
-    const heartMat = new THREE.MeshBasicMaterial({ color: 0x22c55e })
-    const heartMesh = new THREE.Mesh(heartGeom, heartMat)
-    heartMesh.scale.set(0.25, 0.25, 0.25)
-    heartMesh.position.set(-1.4, 0.8, 0.24)
-    monitorGroup.add(heartMesh)
-
-    // 6. Real-Time Sweeping Waveforms Setup
-    const waveLength = 160
-    const ecgPoints: THREE.Vector3[] = []
-    const spo2Points: THREE.Vector3[] = []
-    
-    // Arrays containing active screen values
-    const ecgValues = new Float32Array(waveLength)
-    const spo2Values = new Float32Array(waveLength)
-    let sweepIndex = 0
-
-    // Initialize coordinate buffers
-    for (let i = 0; i < waveLength; i++) {
-      const x = -1.5 + (i * 3.0) / waveLength
-      ecgPoints.push(new THREE.Vector3(x, 0.2, 0.24))
-      spo2Points.push(new THREE.Vector3(x, -0.4, 0.24))
-      ecgValues[i] = 0
-      spo2Values[i] = 0
-    }
-
-    const ecgGeometry = new THREE.BufferGeometry().setFromPoints(ecgPoints)
-    const ecgMaterial = new THREE.LineBasicMaterial({
-      color: 0x22c55e, // Clinical green
-      linewidth: 3,
-    })
-    const ecgLine = new THREE.Line(ecgGeometry, ecgMaterial)
-    monitorGroup.add(ecgLine)
-
-    const spo2Geometry = new THREE.BufferGeometry().setFromPoints(spo2Points)
-    const spo2Material = new THREE.LineBasicMaterial({
-      color: 0x00f2fe, // Cyan SpO2
-      linewidth: 2,
-    })
-    const spo2Line = new THREE.Line(spo2Geometry, spo2Material)
-    monitorGroup.add(spo2Line)
-
-    // Scanning visual line sweep bar
-    const sweepBarGeom = new THREE.BoxGeometry(0.04, 1.8, 0.01)
-    const sweepBarMat = new THREE.MeshBasicMaterial({
+    const ringMat1 = new THREE.MeshBasicMaterial({
       color: 0x00f2fe,
       transparent: true,
-      opacity: 0.8,
+      opacity: 0.4,
+      side: THREE.DoubleSide,
     })
-    const sweepBar = new THREE.Mesh(sweepBarGeom, sweepBarMat)
-    sweepBar.position.set(-1.5, -0.1, 0.24)
-    monitorGroup.add(sweepBar)
+
+    const ringMat2 = new THREE.MeshBasicMaterial({
+      color: 0x10b981,
+      transparent: true,
+      opacity: 0.6,
+      side: THREE.DoubleSide,
+    })
+
+    const hexMat = new THREE.LineBasicMaterial({
+      color: 0x00f2fe,
+      transparent: true,
+      opacity: 0.5,
+    })
+
+    const iconMat = new THREE.MeshBasicMaterial({
+      color: 0xffffff,
+      transparent: true,
+      opacity: 0.8,
+      side: THREE.DoubleSide,
+    })
+
+    const lineIconMat = new THREE.LineBasicMaterial({
+      color: 0xffffff,
+      transparent: true,
+      opacity: 0.85,
+    })
+
+    // 1. Concentric HUD Rings Base (horizontal Y = -0.8)
+    const baseGroup = new THREE.Group()
+    baseGroup.position.y = -0.8
+    holoGroup.add(baseGroup)
+
+    // Solid outer ring
+    const ring1Geom = new THREE.RingGeometry(1.5, 1.54, 64)
+    const ring1Mesh = new THREE.Mesh(ring1Geom, ringMat1)
+    ring1Mesh.rotation.x = -Math.PI / 2
+    baseGroup.add(ring1Mesh)
+
+    // Segmented inner ring (dashed simulation)
+    const ring2Geom = new THREE.RingGeometry(1.2, 1.23, 64)
+    const ring2Mesh = new THREE.Mesh(ring2Geom, ringMat2)
+    ring2Mesh.rotation.x = -Math.PI / 2
+    baseGroup.add(ring2Mesh)
+
+    // Central circular projection core
+    const ring3Geom = new THREE.RingGeometry(0, 0.4, 32)
+    const ring3Mesh = new THREE.Mesh(ring3Geom, new THREE.MeshBasicMaterial({
+      color: 0x00f2fe,
+      transparent: true,
+      opacity: 0.08,
+      side: THREE.DoubleSide,
+    }))
+    ring3Mesh.rotation.x = -Math.PI / 2
+    baseGroup.add(ring3Mesh)
+
+    // 12-dot telemetry ring
+    const dotsGroup = new THREE.Group()
+    const dotGeom = new THREE.SphereGeometry(0.025, 8, 8)
+    for (let i = 0; i < 12; i++) {
+      const angle = (i * Math.PI * 2) / 12
+      const dot = new THREE.Mesh(dotGeom, ringMat1)
+      dot.position.set(Math.cos(angle) * 0.9, 0, Math.sin(angle) * 0.9)
+      dotsGroup.add(dot)
+    }
+    baseGroup.add(dotsGroup)
+
+    // 2. Central Pulsating 3D Medical Cross
+    const crossGroup = new THREE.Group()
+    crossGroup.position.y = 0.2
+    holoGroup.add(crossGroup)
+
+    // Horizontal bar
+    const bar1 = new THREE.Mesh(new THREE.BoxGeometry(0.85, 0.28, 0.28), crossMat)
+    crossGroup.add(bar1)
+
+    // Vertical bar
+    const bar2 = new THREE.Mesh(new THREE.BoxGeometry(0.28, 0.85, 0.28), crossMat)
+    crossGroup.add(bar2)
+
+    // 3. Floating Hexagonal Nodes with Vector Clinical Icons
+    const nodesGroup = new THREE.Group()
+    holoGroup.add(nodesGroup)
+
+    // Helper to build Hexagon Geometry
+    const buildHexGeometry = (size: number) => {
+      const shape = new THREE.Shape()
+      for (let i = 0; i < 6; i++) {
+        const angle = (i * Math.PI) / 3
+        const x = Math.cos(angle) * size
+        const y = Math.sin(angle) * size
+        if (i === 0) shape.moveTo(x, y)
+        else shape.lineTo(x, y)
+      }
+      shape.closePath()
+      return new THREE.EdgesGeometry(new THREE.ShapeGeometry(shape))
+    }
+
+    const hexWireGeom = buildHexGeometry(0.32)
+
+    // Clinical Icon: Heart
+    const heartShape = new THREE.Shape()
+    heartShape.moveTo(0, 0)
+    heartShape.bezierCurveTo(0, 0.08, -0.08, 0.16, -0.16, 0.16)
+    heartShape.bezierCurveTo(-0.28, 0.16, -0.32, 0.04, -0.32, -0.08)
+    heartShape.bezierCurveTo(-0.32, -0.2, -0.16, -0.32, 0, -0.4)
+    heartShape.bezierCurveTo(0.16, -0.32, 0.32, -0.2, 0.32, -0.08)
+    heartShape.bezierCurveTo(0.32, 0.04, 0.28, 0.16, 0.16, 0.16)
+    heartShape.bezierCurveTo(0.08, 0.16, 0, 0.08, 0, 0)
+    const heartGeom = new THREE.ShapeGeometry(heartShape)
+    heartGeom.center()
+    const heartMesh = new THREE.Mesh(heartGeom, iconMat)
+    heartMesh.scale.set(0.38, 0.38, 0.38)
+    heartMesh.position.z = 0.01
+
+    // Clinical Icon: ECG Wave
+    const ecgPoints = [
+      new THREE.Vector3(-0.15, 0, 0),
+      new THREE.Vector3(-0.07, 0, 0),
+      new THREE.Vector3(-0.04, 0.15, 0),
+      new THREE.Vector3(0, -0.16, 0),
+      new THREE.Vector3(0.04, 0.18, 0),
+      new THREE.Vector3(0.08, 0, 0),
+      new THREE.Vector3(0.15, 0, 0),
+    ]
+    const ecgGeom = new THREE.BufferGeometry().setFromPoints(ecgPoints)
+    const ecgLine = new THREE.Line(ecgGeom, lineIconMat)
+    ecgLine.position.z = 0.01
+
+    // Clinical Icon: Plus Symbol
+    const plusIconGroup = new THREE.Group()
+    const horizPlus = new THREE.Mesh(new THREE.BoxGeometry(0.18, 0.05, 0.01), iconMat)
+    const vertPlus = new THREE.Mesh(new THREE.BoxGeometry(0.05, 0.18, 0.01), iconMat)
+    plusIconGroup.add(horizPlus, vertPlus)
+    plusIconGroup.position.z = 0.01
+
+    // Clinical Icon: Activity Sine Wave
+    const wavePoints = []
+    for (let j = 0; j <= 20; j++) {
+      const xVal = -0.15 + (j * 0.3) / 20
+      const yVal = Math.sin(j * 0.6) * 0.08
+      wavePoints.push(new THREE.Vector3(xVal, yVal, 0))
+    }
+    const waveGeom = new THREE.BufferGeometry().setFromPoints(wavePoints)
+    const waveLine = new THREE.Line(waveGeom, lineIconMat)
+    waveLine.position.z = 0.01
+
+    // Setup 4 Nodes
+    const nodeConfigurations = [
+      { pos: new THREE.Vector3(-1.3, 0.6, 0.4), icon: heartMesh },
+      { pos: new THREE.Vector3(1.3, 0.8, -0.4), icon: ecgLine },
+      { pos: new THREE.Vector3(-0.9, 1.2, -0.6), icon: plusIconGroup },
+      { pos: new THREE.Vector3(0.9, 1.1, 0.5), icon: waveLine },
+    ]
+
+    const nodes: THREE.Group[] = []
+
+    nodeConfigurations.forEach((config) => {
+      const node = new THREE.Group()
+      node.position.copy(config.pos)
+      
+      // Wireframe Hexagon
+      const hexLine = new THREE.LineSegments(hexWireGeom, hexMat)
+      node.add(hexLine)
+      
+      // Internal Icon
+      node.add(config.icon)
+      
+      nodesGroup.add(node)
+      nodes.push(node)
+    })
+
+    // 4. Vertical Particle Stream (Holographic rays rising from base)
+    const particleCount = 60
+    const particlePositions = new Float32Array(particleCount * 3)
+    const particleSpeeds = new Float32Array(particleCount)
+    
+    // Initialize particles coordinates in a cylinder
+    for (let i = 0; i < particleCount; i++) {
+      const idx = i * 3
+      const radius = Math.random() * 1.3
+      const angle = Math.random() * Math.PI * 2
+      
+      particlePositions[idx] = Math.cos(angle) * radius // X
+      particlePositions[idx + 1] = -0.8 + Math.random() * 2.5 // Y
+      particlePositions[idx + 2] = Math.sin(angle) * radius // Z
+      
+      particleSpeeds[i] = 0.006 + Math.random() * 0.012
+    }
+
+    const particleGeom = new THREE.BufferGeometry()
+    particleGeom.setAttribute('position', new THREE.BufferAttribute(particlePositions, 3))
+
+    const particleMat = new THREE.PointsMaterial({
+      color: 0x00f2fe,
+      size: 0.045,
+      transparent: true,
+      opacity: 0.6,
+      blending: THREE.AdditiveBlending,
+    })
+
+    const particles = new THREE.Points(particleGeom, particleMat)
+    holoGroup.add(particles)
 
     setLoading(false)
 
-    // Interactive mouse positioning
+    // Interactive mouse parallax positioning
     let targetX = 0
     let targetY = 0
     let currentX = 0
@@ -217,7 +301,31 @@ export function Hero3D() {
       targetY = -(y / height) * 2 + 1
     }
 
-    container.addEventListener('mousemove', handleMouseMove)
+    container.addEventListener('mousemove', handleMouseMove, { passive: true })
+
+    // Theme color interpolation setup
+    const getThemeColors = (isDark: boolean) => {
+      if (isDark) {
+        return {
+          primary: new THREE.Color(0x00f2fe),   // Cyan glow
+          secondary: new THREE.Color(0x10b981), // Emerald telemetry
+          accent: new THREE.Color(0xffffff),    // White icons
+        }
+      } else {
+        return {
+          primary: new THREE.Color(0x008ba3),   // Deep high-contrast cyan
+          secondary: new THREE.Color(0x0f766e), // Clinical teal
+          accent: new THREE.Color(0x0f172a),    // Dark slate icons
+        }
+      }
+    }
+
+    const isInitialDark = themeRef.current === 'dark' || themeRef.current === undefined
+    const initColors = getThemeColors(isInitialDark)
+
+    const currentPrimary = initColors.primary.clone()
+    const currentSecondary = initColors.secondary.clone()
+    const currentAccent = initColors.accent.clone()
 
     // Animation Loop
     let clock = new THREE.Clock()
@@ -226,110 +334,75 @@ export function Hero3D() {
     const tick = () => {
       const elapsedTime = clock.getElapsedTime()
 
-      // 1. Slow, clinical float (translated y coordinate)
-      monitorGroup.position.y = Math.sin(elapsedTime * 1.5) * 0.20
+      // 1. Interpolate theme colors dynamically on changes
+      const isDark = themeRef.current === 'dark' || themeRef.current === undefined
+      const targetColors = getThemeColors(isDark)
+      
+      currentPrimary.lerp(targetColors.primary, 0.08)
+      currentSecondary.lerp(targetColors.secondary, 0.08)
+      currentAccent.lerp(targetColors.accent, 0.08)
 
-      // 2. Advance the real-time sweep index
-      const pointsToUpdate = 2
-      const beatInterval = 1.25 // Time between heartbeats (approx 80bpm)
-      const timeInBeat = elapsedTime % beatInterval
+      // Apply interpolated colors to materials
+      crossMat.color.copy(currentPrimary)
+      crossMat.emissive.copy(currentPrimary)
+      ringMat1.color.copy(currentPrimary)
+      ringMat2.color.copy(currentSecondary)
+      hexMat.color.copy(currentSecondary)
+      iconMat.color.copy(currentAccent)
+      lineIconMat.color.copy(currentAccent)
+      particleMat.color.copy(currentPrimary)
+      glowLight.color.copy(currentPrimary)
 
-      for (let s = 0; s < pointsToUpdate; s++) {
-        sweepIndex = (sweepIndex + 1) % waveLength
+      // 2. Central cross floating and pulsing animations
+      crossGroup.position.y = 0.2 + Math.sin(elapsedTime * 1.8) * 0.12
+      crossGroup.rotation.y = elapsedTime * 0.45
+      
+      // Pulsate scale slightly
+      const crossPulse = 1.0 + Math.sin(elapsedTime * 3.6) * 0.04
+      crossGroup.scale.set(crossPulse, crossPulse, crossPulse)
 
-        // Calculate new ECG wave point based on heartbeat progression
-        let newEcgVal = 0
-        if (timeInBeat < 0.35) {
-          const t = timeInBeat / 0.35 // Normalized beat progression
-          
-          if (t > 0.05 && t < 0.15) {
-            // P-wave
-            newEcgVal = Math.sin((t - 0.05) * Math.PI / 0.1) * 0.08
-          } else if (t >= 0.18 && t < 0.22) {
-            // Q-wave
-            newEcgVal = -0.1
-          } else if (t >= 0.22 && t < 0.28) {
-            // R-wave tall spike
-            const rProgress = (t - 0.22) / 0.06
-            newEcgVal = -0.1 + rProgress * 0.95
-          } else if (t >= 0.28 && t < 0.33) {
-            // S-wave drop
-            const sProgress = (t - 0.28) / 0.05
-            newEcgVal = 0.85 - sProgress * 1.1
-          } else if (t >= 0.33 && t < 0.38) {
-            // Return to baseline
-            const rProgress = (t - 0.33) / 0.05
-            newEcgVal = -0.25 + rProgress * 0.25
-          } else if (t >= 0.42 && t < 0.55) {
-            // T-wave
-            newEcgVal = Math.sin((t - 0.42) * Math.PI / 0.13) * 0.18
-          }
-        }
+      // Pulsate glow light intensity
+      glowLight.intensity = 1.8 + Math.sin(elapsedTime * 4.0) * 0.6
 
-        ecgValues[sweepIndex] = newEcgVal
+      // 3. HUD Base Rings rotations
+      ring1Mesh.rotation.z = -elapsedTime * 0.15
+      ring2Mesh.rotation.z = elapsedTime * 0.3
+      dotsGroup.rotation.y = -elapsedTime * 0.22
 
-        // Generate SpO2 sine respiratory wave
-        spo2Values[sweepIndex] = Math.sin(elapsedTime * 4.5 + sweepIndex * 0.06) * 0.12 + Math.cos(elapsedTime * 2.0) * 0.03
-      }
+      // 4. Hexagonal nodes bobbing and facing camera
+      nodes.forEach((node, idx) => {
+        const offset = idx * Math.PI * 0.5
+        node.position.y = nodeConfigurations[idx].pos.y + Math.sin(elapsedTime * 1.5 + offset) * 0.08
+        
+        // Keep hexagons slightly angled facing the camera
+        node.rotation.y = Math.sin(elapsedTime * 0.3 + offset) * 0.12
+      })
 
-      // 3. Update ECG & SpO2 coordinate buffers
-      const ecgPositions = ecgGeometry.attributes.position.array as Float32Array
-      const spo2Positions = spo2Geometry.attributes.position.array as Float32Array
-      const gapWidth = 10
-
-      for (let i = 0; i < waveLength; i++) {
+      // 5. Rise particles up through the hologram
+      const positions = particleGeom.attributes.position.array as Float32Array
+      for (let i = 0; i < particleCount; i++) {
         const idx = i * 3
-        const isGap = (i >= sweepIndex && i < sweepIndex + gapWidth) || 
-                      (sweepIndex + gapWidth >= waveLength && i < (sweepIndex + gapWidth) % waveLength)
+        positions[idx + 1] += particleSpeeds[i] // rising Y
 
-        if (isGap) {
-          // Flatten lines inside scanning gap
-          ecgPositions[idx + 1] = 0.2
-          spo2Positions[idx + 1] = -0.4
-        } else {
-          ecgPositions[idx + 1] = 0.2 + ecgValues[i]
-          spo2Positions[idx + 1] = -0.4 + spo2Values[i]
+        // Reset particle if it goes too high
+        if (positions[idx + 1] > 1.8) {
+          positions[idx + 1] = -0.8
+          const radius = Math.random() * 1.3
+          const angle = Math.random() * Math.PI * 2
+          positions[idx] = Math.cos(angle) * radius
+          positions[idx + 2] = Math.sin(angle) * radius
         }
       }
-      ecgGeometry.attributes.position.needsUpdate = true
-      spo2Geometry.attributes.position.needsUpdate = true
+      particleGeom.attributes.position.needsUpdate = true
 
-      // 4. Move scanning line sweep bar
-      const barX = -1.5 + (sweepIndex * 3.0) / waveLength
-      sweepBar.position.x = barX
-
-      // 5. Bezel LEDs animation
-      // Power LED stays green
-      ledPowerMat.color.setHex(0x22c55e)
-
-      // Sync LED flashes on heartbeat spike
-      if (timeInBeat > 0.20 && timeInBeat < 0.32) {
-        ledSyncMat.color.setHex(0x22c55e) // Flashes bright green
-        heartMat.color.setHex(0x22c55e)
-        // Pulsing screen lighting glow in sync
-        screenLight.intensity = 1.2
-        heartMesh.scale.set(0.32, 0.32, 0.25)
-      } else {
-        ledSyncMat.color.setHex(0x052e16) // Dark green state
-        heartMat.color.setHex(0x166534)
-        screenLight.intensity = 0.4
-        heartMesh.scale.set(0.25, 0.25, 0.25)
-      }
-
-      // Alarm LED flashes yellow/orange
-      if (Math.floor(elapsedTime * 2.0) % 2 === 0) {
-        ledAlarmMat.color.setHex(0xeab308) // Bright yellow
-      } else {
-        ledAlarmMat.color.setHex(0x713f12) // Dim orange/brown
-      }
-
-      // 6. Camera Tilt Parallax
+      // 6. Smooth Mouse Parallax (Tilts whole hologram)
       currentX += (targetX - currentX) * 0.05
       currentY += (targetY - currentY) * 0.05
       
-      monitorGroup.rotation.y = currentX * 0.26 + elapsedTime * 0.05
-      monitorGroup.rotation.x = -currentY * 0.18
+      holoGroup.rotation.y = currentX * 0.28
+      holoGroup.rotation.x = -currentY * 0.18
 
+      // Render
       renderer.render(scene, camera)
       animationFrameId = requestAnimationFrame(tick)
     }
@@ -354,36 +427,25 @@ export function Hero3D() {
       cancelAnimationFrame(animationFrameId)
       container.removeEventListener('mousemove', handleMouseMove)
       resizeObserver.disconnect()
-      
-      // Dispose WebGL Resources
-      bodyGeom.dispose()
-      bodyMat.dispose()
-      backGeom.dispose()
-      standGeom.dispose()
-      screenGeom.dispose()
-      screenMat.dispose()
-      gridMat.dispose()
-      ledGeom.dispose()
-      ledPowerMat.dispose()
-      ledSyncMat.dispose()
-      ledAlarmMat.dispose()
+
+      // Dispose Geometries and Materials
+      ring1Geom.dispose()
+      ring2Geom.dispose()
+      ring3Geom.dispose()
+      dotGeom.dispose()
+      crossMat.dispose()
+      ringMat1.dispose()
+      ringMat2.dispose()
+      hexMat.dispose()
+      hexWireGeom.dispose()
       heartGeom.dispose()
-      heartMat.dispose()
-      ecgGeometry.dispose()
-      ecgMaterial.dispose()
-      spo2Geometry.dispose()
-      spo2Material.dispose()
-      sweepBarGeom.dispose()
-      sweepBarMat.dispose()
-      
-      gridHelperGroup.traverse((child) => {
-        if (child instanceof THREE.Line) {
-          child.geometry.dispose()
-          if (Array.isArray(child.material)) child.material.forEach(m => m.dispose())
-          else child.material.dispose()
-        }
-      })
-      
+      iconMat.dispose()
+      ecgGeom.dispose()
+      lineIconMat.dispose()
+      waveGeom.dispose()
+      particleGeom.dispose()
+      particleMat.dispose()
+
       renderer.dispose()
     }
   }, [])
@@ -395,8 +457,8 @@ export function Hero3D() {
           <div className="w-10 h-10 rounded-full border-2 border-primary/20 border-t-primary animate-spin" />
         </div>
       )}
-      {/* Soft Cyan Ambient Glow behind screen */}
-      <div className="absolute w-[65%] h-[65%] rounded-full bg-primary/10 blur-3xl pointer-events-none -z-10 animate-pulse" />
+      {/* Soft dynamic background glow */}
+      <div className="absolute w-[60%] h-[60%] rounded-full bg-primary/5 blur-3xl pointer-events-none -z-10 animate-pulse" />
       <canvas ref={canvasRef} className="w-full h-full cursor-grab active:cursor-grabbing" />
     </div>
   )

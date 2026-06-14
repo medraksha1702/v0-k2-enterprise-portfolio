@@ -5,6 +5,8 @@ import { Watermark } from './watermark'
 import { Reveal } from './reveal'
 import { CountUp } from './count-up'
 import { motion } from 'framer-motion'
+import { ShaderBackground } from './ui/shader-background'
+import { DnaHelix } from './ui/dna-helix'
 
 export function About() {
   const stats = [
@@ -21,16 +23,19 @@ export function About() {
     { icon: Headset, label: 'Technical Support' },
   ]
 
-  // Subtle floating biomedical icons (2-5% opacity)
+  // Floating biomedical icons — visible on all screens, smaller on mobile
   const floatingIcons = [
-    { Icon: Microscope, top: '15%', left: '8%', size: 36, speed: 12 },
-    { Icon: FlaskConical, top: '60%', left: '10%', size: 30, speed: 10 },
-    { Icon: HeartPulse, top: '25%', left: '85%', size: 32, speed: 14 },
-    { Icon: Settings, top: '75%', left: '90%', size: 28, speed: 11 },
+    { Icon: Microscope, top: '15%', left: '3%', size: 22, speed: 12 },
+    { Icon: FlaskConical, top: '60%', left: '4%', size: 18, speed: 10 },
+    { Icon: HeartPulse, top: '25%', left: '88%', size: 20, speed: 14 },
+    { Icon: Settings, top: '75%', left: '91%', size: 18, speed: 11 },
   ]
 
   return (
-    <section id="about" className="relative py-20 sm:py-28 md:py-36 bg-muted/20 overflow-hidden">
+    <section id="about" className="relative py-20 sm:py-28 md:py-36 overflow-hidden" style={{ backgroundColor: '#f0fafa' }}>
+      {/* WebGL Animated Shader Background */}
+      <ShaderBackground opacity={0.4} />
+      
       <Watermark text="Trusted Healthcare Partner" position="bottom-right" />
       
       {/* 1. Double-Layer Blueprint Grid Overlay (Subtle 2-4% opacity, clinical engineering look) */}
@@ -41,18 +46,10 @@ export function About() {
       {floatingIcons.map(({ Icon, top, left, size, speed }, index) => (
         <motion.div
           key={index}
-          className="absolute text-primary/5 pointer-events-none z-0 hidden sm:block"
+          className="absolute text-primary/[0.07] pointer-events-none z-0"
           style={{ top, left }}
-          animate={{
-            y: [-12, 12, -12],
-            rotate: [-8, 8, -8],
-          }}
-          transition={{
-            duration: speed,
-            repeat: Infinity,
-            ease: 'easeInOut',
-            delay: index * 0.6,
-          }}
+          animate={{ y: [-10, 10, -10], rotate: [-6, 6, -6] }}
+          transition={{ duration: speed, repeat: Infinity, ease: 'easeInOut', delay: index * 0.6 }}
         >
           <Icon size={size} strokeWidth={1} />
         </motion.div>
@@ -70,12 +67,12 @@ export function About() {
               <span className="inline-block text-sm font-semibold text-primary bg-primary/10 border border-primary/20 px-4 py-1.5 rounded-full">
                 Who We Are
               </span>
-              <h2 className="text-3xl sm:text-5xl font-black text-foreground tracking-tight" style={{ fontFamily: 'var(--font-poppins)' }}>
+              <h2 className="text-3xl sm:text-5xl font-black tracking-tight" style={{ fontFamily: 'var(--font-poppins)', color: '#00292a' }}>
                 About K² Enterprise
               </h2>
 
-              <div className="space-y-5 max-w-xl text-muted-foreground font-light leading-relaxed">
-                <p className="text-lg text-foreground/80 font-normal">
+              <div className="space-y-5 max-w-xl font-light leading-relaxed" style={{ color: '#1a4040' }}>
+                <p className="text-lg font-normal" style={{ color: '#003030' }}>
                   K² Enterprise is a leading biomedical service partner based in Ahmedabad, Gujarat. We specialize in the high-fidelity maintenance, repair, calibration, and support of lab and medical equipment.
                 </p>
                 <p>
@@ -88,7 +85,7 @@ export function About() {
 
               {/* Focus pills */}
               <div className="space-y-3 pt-2">
-                <h3 className="text-xs font-bold uppercase tracking-widest text-muted-foreground/80">Key Operational Core</h3>
+                <h3 className="text-xs font-bold uppercase tracking-widest" style={{ color: '#004b4d' }}>Key Operational Core</h3>
                 <div className="flex flex-wrap gap-3">
                   {focus.map((item, i) => {
                     const Icon = item.icon
@@ -108,8 +105,14 @@ export function About() {
             </div>
           </Reveal>
 
-          {/* Right — Stats grid with glowing Glassmorphism */}
+          {/* Right — Stats grid with glowing Glassmorphism + DNA Helix decoration */}
           <div className="relative">
+            {/* Animated DNA Helix — show on all screens, reposition on mobile */}
+            <div className="absolute -top-6 -right-4 sm:-top-8 sm:-right-6 opacity-40 sm:opacity-50 pointer-events-none z-0">
+              <DnaHelix width={60} height={260} className="sm:hidden" />
+              <DnaHelix width={90} height={340} className="hidden sm:block" />
+            </div>
+
             <div className="grid grid-cols-2 gap-6 relative z-10">
               {stats.map((stat, i) => {
                 const Icon = stat.icon

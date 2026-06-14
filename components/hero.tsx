@@ -5,7 +5,9 @@ import { Button } from '@/components/ui/button'
 import { ArrowRight, CheckCircle2, Phone, Mail, ShieldCheck, MessageCircle, Activity, Shield, Cpu, HeartPulse, Heart, Wrench, Settings } from 'lucide-react'
 import { motion, type Variants } from 'framer-motion'
 import { Hero3D } from './hero-3d'
-import { HeroBgWave } from './hero-bg-wave'
+import { ShaderBackground } from '@/components/ui/shader-background'
+import { Typewriter } from '@/components/ui/typewriter'
+import { MagneticButton } from '@/components/ui/magnetic-button'
 
 const WHATSAPP_URL = `https://wa.me/919510768056?text=${encodeURIComponent(
   'Hello K² Enterprise, I need biomedical equipment support.'
@@ -101,10 +103,10 @@ export function Hero() {
   ]
 
   return (
-    <section className="relative py-16 sm:py-24 md:py-32 overflow-hidden bg-background">
+    <section className="dark relative py-16 sm:py-24 md:py-32 overflow-hidden bg-[#004b4d] text-foreground">
       
-      {/* 3D Animated Waving Particle Grid Background (drawn from reference images) */}
-      <HeroBgWave />
+      {/* WebGL Animated Shader Background */}
+      <ShaderBackground />
 
       {/* LAYER 1: Slow Parallax Layer (Technical Grid + Glows) */}
       <motion.div
@@ -119,7 +121,7 @@ export function Hero() {
         <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(0,109,111,0.035)_1px,transparent_1px),linear-gradient(to_bottom,rgba(0,109,111,0.035)_1px,transparent_1px)] bg-[size:32px_32px] pointer-events-none" />
 
         {/* Ambient background glows for visual depth (3% - 5% opacity) */}
-        <div className="absolute inset-0 bg-gradient-to-b from-primary/5 via-background to-background pointer-events-none"></div>
+        <div className="absolute inset-0 bg-gradient-to-b from-primary/5 via-transparent to-transparent pointer-events-none"></div>
         <div className="absolute inset-0 opacity-[0.06] dark:opacity-[0.03] pointer-events-none">
           <div className="absolute top-1/4 right-12 w-[450px] h-[450px] bg-primary rounded-full blur-[130px]"></div>
           <div className="absolute bottom-1/4 left-12 w-[350px] h-[350px] bg-secondary rounded-full blur-[110px]"></div>
@@ -207,19 +209,10 @@ export function Hero() {
         {floatingPlusSigns.map((plus, index) => (
           <motion.div
             key={`plus-${index}`}
-            className="absolute text-primary/10 dark:text-primary/8 font-extrabold select-none pointer-events-none hidden sm:block"
-            style={{ top: plus.top, left: plus.left, fontSize: plus.size }}
-            animate={{
-              y: [-15, 15, -15],
-              x: [-8, 8, -8],
-              rotate: [0, 360],
-            }}
-            transition={{
-              duration: plus.speed,
-              repeat: Infinity,
-              ease: 'easeInOut',
-              delay: plus.delay,
-            }}
+            className="absolute text-primary/[0.08] dark:text-primary/[0.06] font-extrabold select-none pointer-events-none"
+            style={{ top: plus.top, left: plus.left, fontSize: `calc(${plus.size} * 0.7)` }}
+            animate={{ y: [-12, 12, -12], x: [-6, 6, -6], rotate: [0, 360] }}
+            transition={{ duration: plus.speed, repeat: Infinity, ease: 'easeInOut', delay: plus.delay }}
           >
             +
           </motion.div>
@@ -229,23 +222,10 @@ export function Hero() {
         {floatingParticles.map((dot, index) => (
           <motion.div
             key={`dot-${index}`}
-            className="absolute bg-primary/10 dark:bg-primary/8 rounded-full pointer-events-none hidden sm:block"
-            style={{
-              top: dot.top,
-              left: dot.left,
-              width: dot.size,
-              height: dot.size,
-            }}
-            animate={{
-              y: [0, -20, 0],
-              opacity: [0.3, 0.7, 0.3],
-            }}
-            transition={{
-              duration: dot.speed,
-              repeat: Infinity,
-              ease: 'easeInOut',
-              delay: index * 0.4,
-            }}
+            className="absolute bg-primary/[0.08] dark:bg-primary/[0.07] rounded-full pointer-events-none"
+            style={{ top: dot.top, left: dot.left, width: dot.size * 0.75, height: dot.size * 0.75 }}
+            animate={{ y: [0, -16, 0], opacity: [0.25, 0.6, 0.25] }}
+            transition={{ duration: dot.speed, repeat: Infinity, ease: 'easeInOut', delay: index * 0.4 }}
           />
         ))}
 
@@ -253,19 +233,11 @@ export function Hero() {
         {floatingIcons.map(({ Icon, top, left, delay, size, color }, index) => (
           <motion.div
             key={index}
-            className={`absolute ${color} opacity-[0.8] pointer-events-none hidden sm:block`}
+            className={`absolute ${color} opacity-[0.6] pointer-events-none`}
             style={{ top, left }}
             initial={{ y: 0, rotate: 0 }}
-            animate={{
-              y: [-10, 10, -10],
-              rotate: [-6, 6, -6],
-            }}
-            transition={{
-              duration: 7 + index * 1.5,
-              repeat: Infinity,
-              ease: 'easeInOut',
-              delay,
-            }}
+            animate={{ y: [-8, 8, -8], rotate: [-5, 5, -5] }}
+            transition={{ duration: 7 + index * 1.5, repeat: Infinity, ease: 'easeInOut', delay }}
           >
             <Icon size={size} strokeWidth={1.5} />
           </motion.div>
@@ -278,14 +250,25 @@ export function Hero() {
           {/* Left Column — Headline & CTAs (7 cols) */}
           <div className="lg:col-span-7 space-y-8 min-w-0">
             <div className="space-y-6">
-              {/* Premium Clinical Badge */}
+              {/* Premium Clinical Badge with Typewriter */}
               <div className="inline-flex items-center gap-3 text-xs sm:text-sm font-semibold text-primary bg-primary/10 border border-primary/20 px-4 py-2 rounded-full backdrop-blur-md">
                 <span className="relative flex h-2 w-2">
                   <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-75"></span>
                   <span className="relative inline-flex h-2 w-2 rounded-full bg-primary"></span>
                 </span>
-                Biomedical Equipment Service Specialists
-                
+                <Typewriter
+                  words={[
+                    'Biomedical Equipment Specialists',
+                    'Calibration & Repair Experts',
+                    'Lab Equipment Maintenance',
+                    '24×7 Emergency Support',
+                    'ISO-Compliant Services',
+                  ]}
+                  typingSpeed={70}
+                  erasingSpeed={35}
+                  pauseTime={2200}
+                />
+
                 {/* SVG ECG heartbeat mini indicator */}
                 <svg className="w-12 h-4 text-primary shrink-0 opacity-80" viewBox="0 0 50 20" fill="none">
                   <path
@@ -344,26 +327,30 @@ export function Hero() {
 
             {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row flex-wrap gap-4 pt-2">
-              <Button
-                asChild
-                size="lg"
-                className="group w-full sm:w-auto bg-gradient-to-r from-primary to-secondary hover:from-primary/95 hover:to-secondary/95 text-primary-foreground font-semibold h-13 shadow-xl shadow-primary/20 transition-all duration-300"
-              >
-                <a href="#contact" className="flex items-center justify-center">
-                  Request Service
-                  <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1.5" />
-                </a>
-              </Button>
-              <Button
-                asChild
-                size="lg"
-                className="w-full sm:w-auto bg-emerald-500 hover:bg-emerald-600 text-white font-semibold h-13 shadow-xl shadow-emerald-500/25 transition-all duration-300"
-              >
-                <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center">
-                  <MessageCircle className="w-5 h-5 mr-2" />
-                  WhatsApp Support
-                </a>
-              </Button>
+              <MagneticButton>
+                <Button
+                  asChild
+                  size="lg"
+                  className="group w-full sm:w-auto bg-gradient-to-r from-primary to-secondary hover:from-primary/95 hover:to-secondary/95 text-primary-foreground font-semibold h-13 shadow-xl shadow-primary/20 transition-all duration-300"
+                >
+                  <a href="#contact" className="flex items-center justify-center">
+                    Request Service
+                    <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1.5" />
+                  </a>
+                </Button>
+              </MagneticButton>
+              <MagneticButton>
+                <Button
+                  asChild
+                  size="lg"
+                  className="w-full sm:w-auto bg-emerald-500 hover:bg-emerald-600 text-white font-semibold h-13 shadow-xl shadow-emerald-500/25 transition-all duration-300"
+                >
+                  <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center">
+                    <MessageCircle className="w-5 h-5 mr-2" />
+                    WhatsApp Support
+                  </a>
+                </Button>
+              </MagneticButton>
             </div>
           </div>
 

@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import { Mail, Phone, MapPin, Linkedin, Github } from 'lucide-react'
 import { motion } from 'framer-motion'
+import { ShaderBackground } from './ui/shader-background'
 
 export function Footer() {
   const currentYear = new Date().getFullYear()
@@ -24,7 +25,9 @@ export function Footer() {
 
   return (
     <footer className="relative bg-secondary text-white border-t border-white/10 overflow-hidden pt-16 pb-12">
-      
+      {/* WebGL Animated Shader Background */}
+      <ShaderBackground opacity={0.3} />
+
       {/* 1. Animated Glowing ECG Line at the Top Border (Subtle 4% opacity) */}
       <div className="absolute top-0 left-0 w-full h-8 overflow-hidden pointer-events-none select-none z-10">
         <svg className="w-full h-full text-primary/[0.04]" viewBox="0 0 1200 30" preserveAspectRatio="none" fill="none">

@@ -3,6 +3,7 @@
 import { Zap, Shield, Target, Boxes, Award } from 'lucide-react'
 import { Reveal } from './reveal'
 import { motion } from 'framer-motion'
+import { ShaderBackground } from './ui/shader-background'
 
 export function Trust() {
   const reasons = [
@@ -28,16 +29,19 @@ export function Trust() {
     },
   ]
 
-  // Subtle floating biomedical icons (2-5% opacity)
+  // Floating icons — visible on all screen sizes
   const floatingIcons = [
-    { Icon: Shield, top: '20%', left: '8%', size: 30, speed: 10 },
-    { Icon: Target, top: '70%', left: '6%', size: 26, speed: 14 },
-    { Icon: Boxes, top: '15%', left: '88%', size: 32, speed: 11 },
-    { Icon: Award, top: '75%', left: '85%', size: 28, speed: 13 },
+    { Icon: Shield, top: '20%', left: '2%', size: 20, speed: 10 },
+    { Icon: Target, top: '70%', left: '2%', size: 16, speed: 14 },
+    { Icon: Boxes, top: '15%', left: '89%', size: 22, speed: 11 },
+    { Icon: Award, top: '75%', left: '90%', size: 18, speed: 13 },
   ]
 
   return (
-    <section className="relative py-20 sm:py-28 bg-muted/10 overflow-hidden">
+    <section className="relative py-20 sm:py-28 overflow-hidden" style={{ backgroundColor: '#f0fafa' }}>
+      {/* WebGL Animated Shader Background */}
+      <ShaderBackground opacity={0.4} />
+
       {/* High-Tech Background Glows */}
       <div className="pointer-events-none absolute inset-0 opacity-[0.12] dark:opacity-[0.06] -z-10">
         <div className="absolute -top-10 left-1/4 w-80 h-80 bg-primary rounded-full blur-[100px] animate-float"></div>
@@ -52,18 +56,10 @@ export function Trust() {
       {floatingIcons.map(({ Icon, top, left, size, speed }, index) => (
         <motion.div
           key={`icon-${index}`}
-          className="absolute text-primary/5 pointer-events-none z-0 hidden sm:block"
+          className="absolute text-primary/[0.07] pointer-events-none z-0"
           style={{ top, left }}
-          animate={{
-            y: [-12, 12, -12],
-            rotate: [-8, 8, -8],
-          }}
-          transition={{
-            duration: speed,
-            repeat: Infinity,
-            ease: 'easeInOut',
-            delay: index * 0.5,
-          }}
+          animate={{ y: [-10, 10, -10], rotate: [-6, 6, -6] }}
+          transition={{ duration: speed, repeat: Infinity, ease: 'easeInOut', delay: index * 0.5 }}
         >
           <Icon size={size} strokeWidth={1} />
         </motion.div>
@@ -77,11 +73,11 @@ export function Trust() {
             <span className="inline-block text-sm font-semibold text-primary bg-primary/10 border border-primary/20 px-4 py-1.5 rounded-full">
               Our Promise
             </span>
-            <h2 className="text-3xl md:text-5xl font-black text-foreground tracking-tight" style={{ fontFamily: 'var(--font-poppins)' }}>
+            <h2 className="text-3xl md:text-5xl font-black tracking-tight" style={{ fontFamily: 'var(--font-poppins)', color: '#00292a' }}>
               Why Choose Us
             </h2>
             <div className="accent-line w-20 h-1 bg-primary/25 rounded-full" />
-            <p className="text-lg text-muted-foreground leading-relaxed font-light">
+            <p className="text-lg leading-relaxed font-light" style={{ color: '#1a4040' }}>
               We combine hands-on technical expertise, fast response, and dependable service to keep your biomedical and laboratory equipment running at peak performance — minimizing downtime and protecting your investment.
             </p>
           </div>
