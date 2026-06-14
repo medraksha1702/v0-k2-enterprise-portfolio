@@ -10,6 +10,7 @@ import { WhatsAppButton } from '@/components/whatsapp-button'
 import { ScrollProgress } from '@/components/scroll-progress'
 import { ScrollToTop } from '@/components/scroll-to-top'
 import { TopBanner } from '@/components/top-banner'
+import { TechDivider } from '@/components/tech-divider'
 
 export default function Home() {
   return (
@@ -18,10 +19,15 @@ export default function Home() {
       <TopBanner />
       <Header />
       <Hero />
+      <TechDivider />
       <About />
+      <TechDivider />
       <Services />
+      <TechDivider />
       <Trust />
+      <TechDivider />
       <Experience />
+      <TechDivider />
       <ContactForm />
       <Footer />
       <WhatsAppButton />

@@ -7,6 +7,7 @@
   --background: #F8FAFA;
   --foreground: #1F2933;
   --card: #FFFFFF;
+  --card-rgb: 255, 255, 255;
   --card-foreground: #1F2933;
   --popover: #FFFFFF;
   --popover-foreground: #1F2933;
@@ -43,6 +44,7 @@
   --background: #0F1419;
   --foreground: #F0F2F5;
   --card: #1A1F26;
+  --card-rgb: 26, 31, 38;
   --card-foreground: #F0F2F5;
   --popover: #1A1F26;
   --popover-foreground: #F0F2F5;
@@ -426,3 +428,138 @@
     -webkit-text-fill-color: rgba(255, 255, 255, 0.7);
   }
 }
+
+/* ---- Futuristic Premium Enhancements ---- */
+
+/* Glassmorphism card */
+.glass-card {
+  background: rgba(var(--card-rgb), 0.65) !important;
+  backdrop-filter: blur(14px) saturate(140%) !important;
+  -webkit-backdrop-filter: blur(14px) saturate(140%) !important;
+  border: 1px solid rgba(0, 242, 254, 0.12) !important;
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.25) !important;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+.glass-card:hover {
+  border-color: rgba(0, 242, 254, 0.35) !important;
+  box-shadow: 0 12px 40px 0 rgba(0, 242, 254, 0.18) !important;
+  transform: translateY(-4px);
+}
+
+/* Neon glow classes */
+.neon-glow {
+  text-shadow: 0 0 8px rgba(0, 242, 254, 0.4), 0 0 20px rgba(0, 242, 254, 0.15);
+}
+
+.neon-glow-cyan {
+  box-shadow: 0 0 20px rgba(0, 242, 254, 0.2), inset 0 0 15px rgba(0, 242, 254, 0.08);
+}
+
+.neon-border-glow {
+  position: relative;
+}
+
+.neon-border-glow::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  background: linear-gradient(90deg, var(--primary), var(--secondary), var(--primary));
+  border-radius: inherit;
+  z-index: -1;
+  opacity: 0.2;
+  transition: opacity 0.3s ease;
+}
+
+.neon-border-glow:hover::before {
+  opacity: 0.7;
+}
+
+/* ECG pulse animation */
+.ecg-path {
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+  animation: draw-ecg 3.5s linear infinite;
+}
+
+@keyframes draw-ecg {
+  0% {
+    stroke-dashoffset: 1000;
+  }
+  70% {
+    stroke-dashoffset: 0;
+  }
+  100% {
+    stroke-dashoffset: -1000;
+  }
+}
+
+/* Float animations for tech icons */
+@keyframes float-slow {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-15px) rotate(4deg);
+  }
+}
+
+@keyframes float-medium {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-10px) rotate(-4deg);
+  }
+}
+
+.animate-float-slow {
+  animation: float-slow 10s ease-in-out infinite;
+}
+
+.animate-float-medium {
+  animation: float-medium 7s ease-in-out infinite;
+}
+
+/* Glowing text inputs */
+.glow-input {
+  transition: all 0.3s ease;
+}
+.glow-input:focus {
+  box-shadow: 0 0 15px rgba(0, 242, 254, 0.25);
+  border-color: rgba(0, 242, 254, 0.6) !important;
+}
+
+@keyframes scan-y {
+  0% {
+    top: 0%;
+    opacity: 0;
+  }
+  10%, 90% {
+    opacity: 0.6;
+  }
+  100% {
+    top: 100%;
+    opacity: 0;
+  }
+}
+
+.animate-scan-y {
+  animation: scan-y 6.5s linear infinite;
+}
+
+@keyframes circuit-flow {
+  0% {
+    stroke-dashoffset: 400;
+  }
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+.animate-circuit-flow {
+  animation: circuit-flow 18s linear infinite;
+}
+
+
+

@@ -4,8 +4,9 @@ import { useState } from 'react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
-import { Mail, Phone, MapPin } from 'lucide-react'
+import { Mail, Phone, MapPin, Send, HelpCircle, Activity } from 'lucide-react'
 import { Reveal } from './reveal'
+import { motion } from 'framer-motion'
 
 export function ContactForm() {
   const [formData, setFormData] = useState({
@@ -60,7 +61,7 @@ export function ContactForm() {
       setTimeout(() => {
         setSubmitted(false)
         setWhatsappData(null)
-      }, 8000)
+      }, 9000)
     } catch (err) {
       setError('Network error. Please check your connection and try again.')
       console.error('Form submission error:', err)
@@ -69,192 +70,273 @@ export function ContactForm() {
     }
   }
 
+  // Subtle floating biomedical icons (2-5% opacity)
+  const floatingIcons = [
+    { Icon: Mail, top: '15%', left: '7%', size: 28, speed: 12 },
+    { Icon: Phone, top: '65%', left: '9%', size: 30, speed: 10 },
+    { Icon: MapPin, top: '22%', left: '88%', size: 26, speed: 15 },
+    { Icon: Send, top: '78%', left: '90%', size: 32, speed: 13 },
+  ]
+
   return (
-    <section id="contact" className="py-14 sm:py-20 md:py-28 overflow-x-clip">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-          {/* Contact Info */}
-          <Reveal variant="fade">
-          <div className="space-y-8">
-            <div className="space-y-4">
-              <h2 className="text-3xl md:text-4xl font-bold text-foreground text-balance" style={{ fontFamily: 'var(--font-poppins)' }}>
-                Request Your Service
-              </h2>
-              <p className="text-lg text-muted-foreground">
-                Get in touch with our technical team. We respond quickly and professionally to all service requests.
-              </p>
-            </div>
+    <section id="contact" className="py-20 sm:py-28 md:py-36 bg-background relative overflow-hidden">
+      
+      {/* 1. Double-Layer Blueprint Grid Overlay (Subtle 2.5% opacity, clinical engineering look) */}
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(0,109,111,0.025)_1px,transparent_1px),linear-gradient(to_bottom,rgba(0,109,111,0.025)_1px,transparent_1px)] bg-[size:40px_40px] pointer-events-none z-0" />
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(0,109,111,0.01)_1px,transparent_1px),linear-gradient(to_bottom,rgba(0,109,111,0.01)_1px,transparent_1px)] bg-[size:8px_8px] pointer-events-none z-0" />
 
-            {/* Contact Details */}
-            <div className="space-y-6">
-              <div className="flex items-start gap-4">
-                <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
-                  <Phone className="w-6 h-6 text-primary" />
-                </div>
+      {/* Floating Biomedical Icons (Subtle, 3-5% opacity) */}
+      {floatingIcons.map(({ Icon, top, left, size, speed }, index) => (
+        <motion.div
+          key={`icon-${index}`}
+          className="absolute text-primary/5 pointer-events-none z-0 hidden sm:block"
+          style={{ top, left }}
+          animate={{
+            y: [-12, 12, -12],
+            rotate: [-8, 8, -8],
+          }}
+          transition={{
+            duration: speed,
+            repeat: Infinity,
+            ease: 'easeInOut',
+            delay: index * 0.5,
+          }}
+        >
+          <Icon size={size} strokeWidth={1} />
+        </motion.div>
+      ))}
+
+      <div className="absolute bottom-0 left-1/4 w-[400px] h-[400px] bg-primary/5 rounded-full blur-[100px] pointer-events-none -z-10" />
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+          
+          {/* Left: Contact Info (5 cols) */}
+          <Reveal variant="fade" className="lg:col-span-5 w-full">
+            <div className="space-y-8">
+              <div className="space-y-4">
+                <span className="inline-block text-sm font-semibold text-primary bg-primary/10 border border-primary/20 px-4 py-1.5 rounded-full">
+                  Connect With Us
+                </span>
+                <h2 className="text-3xl md:text-5xl font-black text-foreground tracking-tight" style={{ fontFamily: 'var(--font-poppins)' }}>
+                  Request Service
+                </h2>
+                <p className="text-lg text-muted-foreground leading-relaxed font-light">
+                  Submit a ticket to our technical dispatch unit. Our certified field specialists respond promptly to clinical queries.
+                </p>
+              </div>
+
+              {/* Status Indicator */}
+              <div className="flex items-center gap-3.5 p-4 rounded-xl border border-primary/15 bg-primary/5 backdrop-blur-md">
+                <span className="relative flex h-3 w-3">
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-500 opacity-75"></span>
+                  <span className="relative inline-flex h-3 w-3 rounded-full bg-emerald-500"></span>
+                </span>
                 <div>
-                  <p className="font-semibold text-foreground">Phone</p>
-                  <p className="text-muted-foreground">+91 9510768056</p>
-                  <p className="text-sm text-muted-foreground mt-1">Monday – Saturday</p>
+                  <p className="text-xs font-semibold text-foreground">Operational Status: Online</p>
+                  <p className="text-[11px] text-muted-foreground">Emergency dispatch queue response time &lt; 2 hours</p>
                 </div>
               </div>
 
-              <div className="flex items-start gap-4">
-                <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
-                  <Mail className="w-6 h-6 text-primary" />
-                </div>
-                <div>
-                  <p className="font-semibold text-foreground">Email</p>
-                  <p className="text-muted-foreground">k2biomedicalservice@gmail.com</p>
-                  <p className="text-sm text-muted-foreground mt-1">Quick response support</p>
-                </div>
-              </div>
-
-              <div className="flex items-start gap-4">
-                <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
-                  <MapPin className="w-6 h-6 text-primary" />
-                </div>
-                <div>
-                  <p className="font-semibold text-foreground">Location</p>
-                  <p className="text-muted-foreground">Ahmedabad, Gujarat</p>
-                  <p className="text-sm text-muted-foreground mt-1">Serving hospitals & laboratories across Gujarat</p>
-                </div>
-              </div>
-            </div>
-
-            {/* Why Choose */}
-            <div className="bg-primary/5 border border-primary/20 rounded-xl p-6 space-y-4">
-              <p className="font-semibold text-foreground">Why Choose K² Enterprise?</p>
-              <ul className="space-y-2 text-sm text-muted-foreground">
-                <li>✓ Precision-driven service approach</li>
-                <li>✓ Dedicated technical team support</li>
-                <li>✓ Experienced biomedical expertise</li>
-                <li>✓ Reliable preventive maintenance</li>
-                <li>✓ Customer-centric relationships</li>
-              </ul>
-            </div>
-          </div>
-          </Reveal>
-
-          {/* Contact Form */}
-          <Reveal variant="fade" delay={120}>
-          <div className="bg-card border border-border rounded-2xl p-8">
-            <form onSubmit={handleSubmit} className="space-y-6">
-              <div>
-                <label htmlFor="name" className="block text-sm font-semibold text-foreground mb-2">
-                  Your Name *
-                </label>
-                <Input
-                  id="name"
-                  name="name"
-                  placeholder="Enter your name"
-                  value={formData.name}
-                  onChange={handleChange}
-                  required
-                  className="bg-background border-border"
-                />
-              </div>
-
-              <div>
-                <label htmlFor="hospital" className="block text-sm font-semibold text-foreground mb-2">
-                  Hospital/Laboratory Name *
-                </label>
-                <Input
-                  id="hospital"
-                  name="hospital"
-                  placeholder="Your facility name"
-                  value={formData.hospital}
-                  onChange={handleChange}
-                  required
-                  className="bg-background border-border"
-                />
-              </div>
-
-              <div>
-                <label htmlFor="phone" className="block text-sm font-semibold text-foreground mb-2">
-                  Phone Number *
-                </label>
-                <Input
-                  id="phone"
-                  name="phone"
-                  placeholder="+91"
-                  value={formData.phone}
-                  onChange={handleChange}
-                  required
-                  className="bg-background border-border"
-                />
-              </div>
-
-              <div>
-                <label htmlFor="equipment" className="block text-sm font-semibold text-foreground mb-2">
-                  Equipment Type *
-                </label>
-                <Input
-                  id="equipment"
-                  name="equipment"
-                  placeholder="e.g., ECG Machine, Ventilator, etc."
-                  value={formData.equipment}
-                  onChange={handleChange}
-                  required
-                  className="bg-background border-border"
-                />
-              </div>
-
-              <div>
-                <label htmlFor="issue" className="block text-sm font-semibold text-foreground mb-2">
-                  Issue Description *
-                </label>
-                <Textarea
-                  id="issue"
-                  name="issue"
-                  placeholder="Describe the issue or service needed..."
-                  value={formData.issue}
-                  onChange={handleChange}
-                  required
-                  className="bg-background border-border resize-none"
-                  rows={4}
-                />
-              </div>
-
-              <Button
-                type="submit"
-                disabled={loading || submitted}
-                className="w-full bg-primary hover:bg-primary/90 disabled:bg-primary/50 text-primary-foreground text-base font-semibold h-12 transition-all"
-              >
-                {loading ? 'Submitting...' : submitted ? '✓ Request Submitted Successfully' : 'Submit Service Request'}
-              </Button>
-
-              {error && (
-                <div className="bg-red-50 border border-red-200 text-red-700 text-sm rounded-lg p-4">
-                  {error}
-                </div>
-              )}
-
-              {submitted && (
-                <div className="space-y-4">
-                  <div className="bg-green-50 border border-green-200 text-green-700 text-sm rounded-lg p-4">
-                    <p className="font-semibold mb-1">Thank you for your service request!</p>
-                    <p>We've received your request and our team will contact you shortly at {formData.phone}.</p>
+              {/* Contact Details (Glass Cards) */}
+              <div className="space-y-4">
+                
+                <a
+                  href="tel:+919510768056"
+                  className="group flex items-center gap-4 rounded-2xl border border-border/80 bg-card/45 backdrop-blur-md p-4 hover:border-primary/40 transition-all duration-300"
+                >
+                  <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center shrink-0 group-hover:bg-primary/20 transition-colors">
+                    <Phone className="w-5.5 h-5.5 text-primary" />
                   </div>
-                  
-                  {whatsappData && (
-                    <div className="bg-emerald-50 border border-emerald-200 text-emerald-900 rounded-lg p-4 space-y-3">
-                      <p className="font-semibold text-sm">You can also reach us directly on WhatsApp:</p>
-                      <a
-                        href={`https://wa.me/${whatsappData.phone}?text=${encodeURIComponent(whatsappData.message)}`}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-2 bg-emerald-500 hover:bg-emerald-600 text-white font-semibold py-2 px-4 rounded-lg text-sm transition-colors"
-                      >
-                        <span>💬</span>
-                        Open WhatsApp Chat
-                      </a>
-                    </div>
-                  )}
+                  <div className="min-w-0">
+                    <p className="text-[11px] font-bold text-muted-foreground uppercase tracking-widest">Voice Direct</p>
+                    <p className="text-base font-extrabold text-foreground group-hover:text-primary transition-colors">+91 9510768056</p>
+                    <p className="text-[10px] text-muted-foreground">Mon–Sat · Priority Standby</p>
+                  </div>
+                </a>
+
+                <a
+                  href="mailto:k2biomedicalservice@gmail.com"
+                  className="group flex items-center gap-4 rounded-2xl border border-border/80 bg-card/45 backdrop-blur-md p-4 hover:border-primary/40 transition-all duration-300"
+                >
+                  <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center shrink-0 group-hover:bg-primary/20 transition-colors">
+                    <Mail className="w-5.5 h-5.5 text-primary" />
+                  </div>
+                  <div className="min-w-0">
+                    <p className="text-[11px] font-bold text-muted-foreground uppercase tracking-widest">Secure Dispatch</p>
+                    <p className="text-sm sm:text-base font-extrabold text-foreground group-hover:text-primary transition-colors break-all">k2biomedicalservice@gmail.com</p>
+                    <p className="text-[10px] text-muted-foreground">Digital ticket tracking enabled</p>
+                  </div>
+                </a>
+
+                <div className="flex items-center gap-4 rounded-2xl border border-border/80 bg-card/45 backdrop-blur-md p-4">
+                  <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center shrink-0">
+                    <MapPin className="w-5.5 h-5.5 text-primary" />
+                  </div>
+                  <div className="min-w-0">
+                    <p className="text-[11px] font-bold text-muted-foreground uppercase tracking-widest">Base Operations</p>
+                    <p className="text-base font-extrabold text-foreground">Ahmedabad, Gujarat</p>
+                    <p className="text-[10px] text-muted-foreground">Serving medical facilities pan-Gujarat</p>
+                  </div>
                 </div>
-              )}
-            </form>
-          </div>
+
+              </div>
+            </div>
           </Reveal>
+
+          {/* Right: Glowing Form (7 cols) */}
+          <Reveal variant="fade" delay={120} className="lg:col-span-7 w-full">
+            <div className="glass-card border border-primary/20 bg-card/25 backdrop-blur-2xl rounded-3xl p-6 sm:p-10 shadow-2xl relative">
+              
+              {/* Decorative high-tech grid crosshairs */}
+              <div className="absolute top-4 right-4 text-primary/30 pointer-events-none select-none">
+                <Activity size={18} />
+              </div>
+              
+              <form onSubmit={handleSubmit} className="space-y-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                  <div>
+                    <label htmlFor="name" className="block text-xs font-bold text-foreground uppercase tracking-widest mb-2">
+                      Full Name *
+                    </label>
+                    <Input
+                      id="name"
+                      name="name"
+                      placeholder="e.g. Dr. John Doe"
+                      value={formData.name}
+                      onChange={handleChange}
+                      required
+                      className="glow-input bg-background/50 border-border h-11 rounded-xl"
+                    />
+                  </div>
+
+                  <div>
+                    <label htmlFor="hospital" className="block text-xs font-bold text-foreground uppercase tracking-widest mb-2">
+                      Facility Name *
+                    </label>
+                    <Input
+                      id="hospital"
+                      name="hospital"
+                      placeholder="e.g. Sterling Hospital"
+                      value={formData.hospital}
+                      onChange={handleChange}
+                      required
+                      className="glow-input bg-background/50 border-border h-11 rounded-xl"
+                    />
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                  <div>
+                    <label htmlFor="phone" className="block text-xs font-bold text-foreground uppercase tracking-widest mb-2">
+                      Contact Phone *
+                    </label>
+                    <Input
+                      id="phone"
+                      name="phone"
+                      placeholder="+91"
+                      value={formData.phone}
+                      onChange={handleChange}
+                      required
+                      className="glow-input bg-background/50 border-border h-11 rounded-xl"
+                    />
+                  </div>
+
+                  <div>
+                    <label htmlFor="equipment" className="block text-xs font-bold text-foreground uppercase tracking-widest mb-2">
+                      Equipment Model / Type *
+                    </label>
+                    <Input
+                      id="equipment"
+                      name="equipment"
+                      placeholder="e.g. Mindray Hematology Analyzer"
+                      value={formData.equipment}
+                      onChange={handleChange}
+                      required
+                      className="glow-input bg-background/50 border-border h-11 rounded-xl"
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <label htmlFor="issue" className="block text-xs font-bold text-foreground uppercase tracking-widest mb-2">
+                    Describe System Issue *
+                  </label>
+                  <Textarea
+                    id="issue"
+                    name="issue"
+                    placeholder="Provide details on error codes, calibration drift, or failure states..."
+                    value={formData.issue}
+                    onChange={handleChange}
+                    required
+                    className="glow-input bg-background/50 border-border rounded-xl resize-none"
+                    rows={4}
+                  />
+                </div>
+
+                <Button
+                  type="submit"
+                  disabled={loading || submitted}
+                  className="w-full bg-gradient-to-r from-primary to-secondary hover:from-primary/95 hover:to-secondary/95 disabled:bg-primary/40 text-primary-foreground text-sm font-bold tracking-widest uppercase h-12 rounded-xl transition-all duration-300 shadow-lg shadow-primary/15"
+                >
+                  {loading ? (
+                    <span className="flex items-center gap-2">
+                      <span className="w-4 h-4 border-2 border-background/20 border-t-background rounded-full animate-spin" />
+                      Broadcasting Request...
+                    </span>
+                  ) : submitted ? (
+                    '✓ Request Submitted Successfully'
+                  ) : (
+                    <span className="flex items-center gap-2">
+                      <Send size={15} />
+                      Transmit Ticket
+                    </span>
+                  )}
+                </Button>
+
+                {error && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="bg-red-500/10 border border-red-500/35 text-red-500 dark:text-red-400 text-xs rounded-xl p-4 flex items-start gap-2.5"
+                  >
+                    <HelpCircle className="w-4 h-4 shrink-0 mt-0.5" />
+                    <p>{error}</p>
+                  </motion.div>
+                )}
+
+                {submitted && (
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    className="space-y-4"
+                  >
+                    <div className="bg-emerald-500/10 border border-emerald-500/30 text-emerald-600 dark:text-emerald-400 text-xs rounded-xl p-4">
+                      <p className="font-bold mb-1">Transmission Confirmed</p>
+                      <p className="font-light leading-relaxed">
+                        Ticket successfully routed. A calibration engineer will contact you shortly at {formData.phone} to arrange coordinates.
+                      </p>
+                    </div>
+                    
+                    {whatsappData && (
+                      <div className="bg-primary/5 border border-primary/20 text-foreground rounded-xl p-4 space-y-3.5">
+                        <p className="font-bold text-xs tracking-wider uppercase">Direct Bypass Connection</p>
+                        <a
+                          href={`https://wa.me/${whatsappData.phone}?text=${encodeURIComponent(whatsappData.message)}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-2 bg-emerald-500 hover:bg-emerald-600 text-white font-bold tracking-wider uppercase py-2.5 px-5 rounded-xl text-xs transition-all duration-300 shadow-md shadow-emerald-500/20"
+                        >
+                          💬 Launch WhatsApp Bridge
+                        </a>
+                      </div>
+                    )}
+                  </motion.div>
+                )}
+              </form>
+            </div>
+          </Reveal>
+
         </div>
       </div>
     </section>
